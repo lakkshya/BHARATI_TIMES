@@ -16,6 +16,7 @@ import CurrentIssue from "./pages/CurrentIssue";
 import Archive from "./pages/Archive";
 import Login from "./pages/Login";
 import Footer from './components/Footer'
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/currentissue" element={<CurrentIssue />} />
         <Route path="/archive" element={<Archive />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
       <Footer />
     </Router>
