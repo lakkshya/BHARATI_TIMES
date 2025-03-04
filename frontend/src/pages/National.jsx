@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 
 import AdSlider from "../components/AdSlider";
@@ -14,36 +14,23 @@ const National = () => {
     "http://localhost:1337/api/articles/category/National"
   );
 
-  const { loading: allLoading, error: allError, data: allArticles } = useFetch( 
-    "http://localhost:1337/api/articles"
-  );
+  const {
+    loading: allLoading,
+    error: allError,
+    data: allArticles,
+  } = useFetch("http://localhost:1337/api/articles");
 
-  const [visibleCards, setVisibleCards] = useState([]);
+  let shuffledArticles = [];
+  if (allArticles) {
+    const filteredArticles = allArticles.filter(
+      (article) => article.category !== "National"
+    );
+    shuffledArticles = [...filteredArticles].sort(() => 0.5 - Math.random());
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  useEffect(() => {
-    if (allArticles) {
-      const filteredArticles = allArticles.filter(article => article.category !== "National");
-      const shuffledArticles = [...filteredArticles].sort(() => 0.5 - Math.random());
-  
-      const handleResize = () => {
-        if (window.innerWidth < 1024) {
-          setVisibleCards(shuffledArticles.slice(0, 4));
-        } else {
-          setVisibleCards(shuffledArticles.slice(0, 6));
-        }
-      };
-  
-      window.addEventListener("resize", handleResize);
-      handleResize();
-  
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, [allArticles]);
-  
 
   if (loading || allLoading) {
     return (
@@ -79,12 +66,12 @@ const National = () => {
           </div>
         </section>
 
-        <section className="flex flex-col md:flex-row md:items-center gap-10">
-          <div className="w-full md:w-3/5">
+        <section className="flex flex-col lg:flex-row gap-10">
+          <div className="w-full lg:w-3/5">
             {data[0] && <BigCard article={data[0]} />}
           </div>
-          <div className="w-full md:w-2/5">
-            <div className="flex flex-col gap-8 md:gap-5">
+          <div className="w-full lg:w-2/5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-5">
               {data.slice(1, 3).map((article) => (
                 <SideCard key={article.id} article={article} />
               ))}
@@ -94,8 +81,7 @@ const National = () => {
 
         <section className="flex flex-col md:flex-row gap-10">
           <div className="flex flex-col gap-5">
-            <h2 className="text-xl font-medium">Latest News</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-5">
               {data.slice(3, 7).map((article) => (
                 <MidCard key={article.id} article={article} />
               ))}
@@ -110,7 +96,7 @@ const National = () => {
             )}
           </div>
           <div className="w-full lg:w-2/5">
-            <div className="flex flex-col md:flex-row lg:flex-col gap-8 md:gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-5">
               {data.slice(8, 10).map((article) => (
                 <SideCard key={article.id} article={article} />
               ))}
@@ -121,8 +107,14 @@ const National = () => {
         <section className="flex flex-col md:flex-row gap-10">
           <div className="flex flex-col gap-5">
             <h2 className="text-xl font-medium">You may also like</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-5">
-              {visibleCards.map((article) => (
+
+            <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-5">
+              {shuffledArticles.slice(0, 6).map((article) => (
+                <SmallCard key={article.id} article={article} />
+              ))}
+            </div>
+            <div className="grid grid-cols-1 xs:grid-cols-2 md:hidden gap-5">
+              {shuffledArticles.slice(0, 4).map((article) => (
                 <SmallCard key={article.id} article={article} />
               ))}
             </div>

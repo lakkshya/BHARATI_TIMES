@@ -20,8 +20,8 @@ const Navbar = () => {
     <>
       <nav className="bg-gray-300 flex flex-col lg:block items-end relative">
         {/* Mobile Header */}
-        <div className="flex lg:hidden justify-between w-full">
-          <div className="flex items-center !px-6 text-gray-900 text-sm">
+        <div className="flex lg:hidden justify-between sm:justify-end w-full">
+          <div className="flex items-center sm:hidden !px-6 text-gray-900 text-sm">
             <p className="text-sm font-bold text-gray-700">{formattedDate}</p>
           </div>
           <div className="cursor-pointer !px-6 !py-2" onClick={toggleMenu}>
@@ -44,7 +44,7 @@ const Navbar = () => {
 
         {/* Main Navigation */}
         <ul
-          className={`lg:flex justify-between !px-6 !py-4 lg:!py-2 text-md text-gray-700 ${
+          className={`lg:flex justify-between !px-6 !py-4 lg:!py-2 text-sm text-gray-700 ${
             isMenuOpen ? "block" : "hidden"
           }`}
         >
@@ -65,6 +65,7 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   `${isActive ? "text-gray-900 font-bold" : "hover:text-gray-900 hover:font-medium"}`
                 }
+                onClick={() => setIsMenuOpen(false)}
               >
                 {label}
               </NavLink>
@@ -72,7 +73,7 @@ const Navbar = () => {
           ))}
 
           {/* More items for small screens (No dropdown) */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             {[
               { path: "/aboutus", label: "About" },
               { path: "/contactus", label: "Contact" },
@@ -86,6 +87,7 @@ const Navbar = () => {
                   className={({ isActive }) =>
                     `${isActive ? "text-gray-700 font-bold" : "hover:text-gray-900 hover:font-medium"}`
                   }
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {label}
                 </NavLink>
@@ -93,9 +95,9 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* More Dropdown (Only for md and larger screens) */}
+          {/* More Dropdown (Only for larger screens) */}
           <li
-            className="relative text-right mb-2 lg:mb-0 cursor-pointer hidden lg:block"
+            className="relative text-right cursor-pointer hidden lg:block"
             onMouseEnter={() => setIsMoreOpen(true)}
             onMouseLeave={() => setIsMoreOpen(false)}
           >
@@ -119,7 +121,7 @@ const Navbar = () => {
 
             {/* Dropdown Menu (Aligned to Right) */}
             <ul
-              className={`absolute right-0 mt-2 w-48 bg-gray-300 text-gray-700 border border-gray-500 shadow-lg z-50 rounded-md transition-all ${
+              className={`absolute right-0 !mt-2 w-48 bg-gray-300 text-gray-700 border border-gray-500 shadow-lg z-50 rounded-md transition-all ${
                 isMoreOpen ? "block" : "hidden"
               }`}
             >

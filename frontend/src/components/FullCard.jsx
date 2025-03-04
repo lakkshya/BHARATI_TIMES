@@ -34,7 +34,7 @@ const FullCard = ({ articles }) => {
     <Link to={`/article/${id}`} className="block">
       <div className="relative w-full">
         {/* Card */}
-        <div className="relative rounded-lg overflow-hidden bg-white text-white h-80 lg:h-112 xl:h-88 group">
+        <div className="relative rounded-lg overflow-hidden bg-white text-white h-96 lg:h-112 xl:h-88 group">
           {/* Background Image */}
           <img
             src={coverImageUrl}
@@ -45,19 +45,25 @@ const FullCard = ({ articles }) => {
           <div className="absolute inset-0 bg-black opacity-60"></div>
           {/* Content */}
           <div className="absolute bottom-0 flex flex-col justify-center gap-4 !py-6 !px-14">
-            <p className="text-sm md:text-md">
-              {author || "Unknown Author"} | {formattedcreatedAt}
-            </p>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-medium">{title}</h3>
-            <p className="text-sm md:text-md">
+            <div className="flex flex-col xs:inline text-sm md:text-base">
+              <span>{author || "Unknown Author"}</span>
+              <span className="hidden xs:inline"> | </span>
+              <span>{formattedcreatedAt}</span>
+            </div>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-medium">
+              {title}
+            </h3>
+            <div className="flex flex-col xs:inline text-sm md:text-base">
               <span className="text-red-400 font-medium">
                 {category || "General"}
-              </span>{" "}
-              |{" "}
-              {timeToRead
-                ? `${timeToRead} min read`
-                : "Reading time unavailable"}
-            </p>
+              </span>
+              <span className="hidden xs:inline"> | </span>
+              <span>
+                {timeToRead
+                  ? `${timeToRead} min read`
+                  : "Reading time unavailable"}
+              </span>
+            </div>
           </div>
         </div>
 
