@@ -30,17 +30,17 @@ const SmallCard = ({ article }) => {
 
         {/* Article Details */}
         <div className="flex flex-col justify-center gap-1">
-          <div className="inline lg:flex lg:flex-col xl:inline text-sm md:text-md text-gray-600">
+          <div className="inline lg:flex lg:flex-col text-sm text-gray-600">
             <span>{author || "Unknown Author"}</span>
-            <span className="inline lg:hidden xl:inline"> | </span>
+            <span className="inline lg:hidden"> | </span>
             <span>{formattedcreatedAt}</span>
           </div>
 
-          <h3 className="text-md md:text-xl font-medium smallcard-title">
+          <h3 className="text-sm md:text-base font-medium smallcard-title">
             {title}
           </h3>
 
-          <div className="inline lg:flex lg:flex-col xl:inline text-sm md:text-md text-gray-600">
+          <div className="inline lg:flex lg:flex-col xl:inline text-sm text-gray-600">
             <span className="text-red-700 font-medium ">
               {category || "General"}
             </span>

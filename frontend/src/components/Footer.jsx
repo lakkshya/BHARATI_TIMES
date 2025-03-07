@@ -5,11 +5,11 @@ const Footer = () => {
   return (
     <footer className="flex flex-col bg-gray-300">
       <div className="flex md:flex-col border-b-1 border-gray-500">
-        <div className="bg-gray-300 text-gray-900 font-medium flex flex-col md:flex-row w-full justify-between gap-6 !p-6">
+        <div className="bg-gray-300 text-gray-900 font-medium flex flex-col md:flex-row w-full justify-between gap-6 !px-3 lg:!px-6 !py-6">
           <div className="flex gap-10 sm:gap-20 w-full md:w-1/2 justify-between md:justify-start">
             <div className="flex flex-col gap-3">
-              <h1 className="text-base md:text-xl">Social Links</h1>
-              <div className="flex flex-col gap-2 text-gray-700 font-normal text-sm md:text-base">
+              <h1 className="text-base md:text-lg">Social Links</h1>
+              <div className="flex flex-col gap-2 text-gray-700 font-normal text-sm">
                 <a
                   href="https://www.facebook.com/people/Bvicam-New-Delhi/100075344976453/"
                   target="_blank"
@@ -49,8 +49,8 @@ const Footer = () => {
             </div>
 
             <div className="flex flex-col gap-3 items-end md:items-start text-right md:text-left">
-              <h1 className="text-base md:text-xl">Important Links</h1>
-              <div className="flex flex-col gap-2 text-gray-700 font-normal text-sm md:text-base">
+              <h1 className="text-base md:text-lg">Important Links</h1>
+              <div className="flex flex-col gap-2 text-gray-700 font-normal text-sm">
                 <Link
                   to="/aboutus"
                   className="hover:text-gray-900 hover:font-medium"
@@ -85,12 +85,12 @@ const Footer = () => {
 
           {/* Google Map Embed */}
           <div className="w-full md:w-1/2">
-            <h1 className="text-base md:text-xl md:text-right !mb-3">
+            <h1 className="text-base md:text-lg md:text-right !mb-3">
               Our Location
             </h1>
             <div className="flex md:justify-end">
               <iframe
-                className="w-full lg:w-2/3 md:h-52 rounded-lg border border-gray-600"
+                className="w-full md:w-3/4 lg:w-2/3 md:h-40 rounded-lg border border-gray-600"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.4726849450467!2d77.1106680739007!3d28.67550368213097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d038b9232e7cd%3A0x34ebc68df4428491!2sBharati%20Vidyapeeth&#39;s%20Institute%20of%20Computer%20Applications%20and%20Management%20(BVICAM)!5e0!3m2!1sen!2sin!4v1739957724470!5m2!1sen!2sin"
                 allowFullScreen=""
                 loading="lazy"

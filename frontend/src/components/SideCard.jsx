@@ -21,17 +21,17 @@ const SideCard = ({ article }) => {
       <div className="rounded-lg flex gap-3 overflow-hidden bg-white group">
         {/* Article Details */}
         <div className="flex flex-col justify-center gap-1 w-1/2">
-          <div className="flex flex-col xs:inline md:flex xl:inline text-sm lg:text-base text-gray-600">
+          <div className="flex flex-col xs:inline md:flex text-sm text-gray-600">
             <span>{author || "Unknown Author"}</span>
-            <span className="hidden xs:inline md:hidden xl:inline"> | </span>
+            <span className="hidden xs:inline md:hidden"> | </span>
             <span>{formattedcreatedAt}</span>
           </div>
 
-          <h3 className="text-base xs:text-lg font-medium sidecard-title">
+          <h3 className="text-base font-medium sidecard-title">
             {title}
           </h3>
 
-          <div className="flex flex-col xs:inline md:flex xl:inline text-sm lg:text-base text-gray-600">
+          <div className="flex flex-col xs:inline md:flex xl:inline text-sm text-gray-600">
             <span className="text-red-700 font-medium ">
               {category || "General"}
             </span>

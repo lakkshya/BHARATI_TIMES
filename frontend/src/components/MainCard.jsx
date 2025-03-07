@@ -25,20 +25,20 @@ const MainCard = ({ article }) => {
   return (
     <div className="rounded-lg flex flex-col overflow-hidden bg-white">
       <div className="flex flex-col justify-center !gap-4">
-        <h3 className="text-2xl font-medium">{title}</h3>
+        <h3 className="text-xl md:text-2xl font-medium">{title}</h3>
         <div className="flex flex-col gap-2">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm md:text-base text-gray-600">
             {author || "Unknown Author"} | {formattedcreatedAt}
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm md:text-md text-gray-600">
             <span className="text-red-700 font-medium">
               {category || "General"}
             </span>{" "}
-            <span className="text-gray-600 hidden lg:inline text-sm md:text-md">
+            <span className="text-gray-600 hidden lg:inline">
               {" "}
               |{" "}
             </span>
-            <span className="text-gray-600 text-sm md:text-md">
+            <span className="text-gray-600">
               {timeToRead
                 ? `${timeToRead} min read`
                 : "Reading time unavailable"}
@@ -48,11 +48,11 @@ const MainCard = ({ article }) => {
         <div className="">
           <img
             src={coverImageUrl}
-            className="w-full h-128 object-cover rounded-lg"
+            className="w-full h-80 lg:h-128 object-cover object-center rounded-lg"
             alt={title}
           />
         </div>
-        <p className="text-sm text-gray-600">{body}</p>
+        <p className="text-base text-gray-600">{body}</p>
       </div>
     </div>
   );

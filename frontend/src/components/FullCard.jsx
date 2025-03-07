@@ -34,7 +34,7 @@ const FullCard = ({ articles }) => {
     <Link to={`/article/${id}`} className="block">
       <div className="relative w-full">
         {/* Card */}
-        <div className="relative rounded-lg overflow-hidden bg-white text-white h-96 lg:h-112 xl:h-88 group">
+        <div className="relative rounded-lg overflow-hidden bg-white text-white h-80 lg:h-100 xl:h-80 group">
           {/* Background Image */}
           <img
             src={coverImageUrl}
@@ -50,7 +50,7 @@ const FullCard = ({ articles }) => {
               <span className="hidden xs:inline"> | </span>
               <span>{formattedcreatedAt}</span>
             </div>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-medium">
+            <h3 className="text-xl sm:text-2xl font-medium">
               {title}
             </h3>
             <div className="flex flex-col xs:inline text-sm md:text-base">

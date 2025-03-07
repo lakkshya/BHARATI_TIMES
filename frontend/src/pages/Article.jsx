@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import MainCard from "../components/MainCard";
@@ -16,30 +16,17 @@ const Article = () => {
     data: allArticles,
   } = useFetch("http://localhost:1337/api/articles");
 
-  const [visibleCards, setVisibleCards] = useState([]);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  useEffect(() => {
-    if (allArticles) {
-      const shuffledArticles = [...allArticles].sort(() => 0.5 - Math.random());
-
-      const handleResize = () => {
-        if (window.innerWidth < 1024) {
-          setVisibleCards(shuffledArticles.slice(0, 4));
-        } else {
-          setVisibleCards(shuffledArticles.slice(0, 6));
-        }
-      };
-
-      window.addEventListener("resize", handleResize);
-      handleResize();
-
-      return () => window.removeEventListener("resize", handleResize);
-    }
-  }, [allArticles]);
+  let shuffledArticles = [];
+  if (allArticles) {
+    const filteredArticles = allArticles.filter(
+      (article) => article.category !== "Entertainment"
+    );
+    shuffledArticles = [...filteredArticles].sort(() => 0.5 - Math.random());
+  }
 
   if (loading || allLoading) {
     return (
@@ -58,7 +45,7 @@ const Article = () => {
   }
 
   return (
-    <div className="!px-6 !py-10 flex flex-col lg:flex-row w-full gap-8 md:gap-10">
+    <div className="!px-3 lg:!px-6 !py-10 flex flex-col lg:flex-row w-full gap-8 md:gap-10">
       <main className="w-full lg:w-2/3">
         <MainCard article={data} />
       </main>
@@ -66,7 +53,7 @@ const Article = () => {
         <div className="flex flex-col gap-5">
           <h2 className="text-xl font-medium">You may also like</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-5">
-            {visibleCards.map((article) => (
+            {shuffledArticles.slice(0, 6).map((article) => (
               <SideCard key={article.id} article={article} />
             ))}
           </div>

@@ -21,10 +21,10 @@ const Navbar = () => {
       <nav className="bg-gray-300 flex flex-col lg:block items-end relative">
         {/* Mobile Header */}
         <div className="flex lg:hidden justify-between sm:justify-end w-full">
-          <div className="flex items-center sm:hidden !px-6 text-gray-900 text-sm">
+          <div className="flex items-center sm:hidden !px-3 lg:!px-6 text-gray-900 text-sm">
             <p className="text-sm font-bold text-gray-700">{formattedDate}</p>
           </div>
-          <div className="cursor-pointer !px-6 !py-2" onClick={toggleMenu}>
+          <div className="cursor-pointer !px-3 lg:!px-6 !py-2" onClick={toggleMenu}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -44,7 +44,7 @@ const Navbar = () => {
 
         {/* Main Navigation */}
         <ul
-          className={`lg:flex justify-between !px-6 !py-4 lg:!py-2 text-sm text-gray-700 ${
+          className={`lg:flex justify-between text-sm text-gray-700 !px-3 lg:!px-6 ${
             isMenuOpen ? "block" : "hidden"
           }`}
         >
@@ -59,7 +59,7 @@ const Navbar = () => {
             { path: "/entertainment", label: "Entertainment" },
             { path: "/sports", label: "Sports" },
           ].map(({ path, label }) => (
-            <li key={path} className="text-right !mb-2 lg:!mb-0">
+            <li key={path} className="text-right !mb-2 lg:!mb-0 lg:!py-2">
               <NavLink
                 to={path}
                 className={({ isActive }) =>
@@ -97,7 +97,7 @@ const Navbar = () => {
 
           {/* More Dropdown (Only for larger screens) */}
           <li
-            className="relative text-right cursor-pointer hidden lg:block"
+            className="relative text-right cursor-pointer hidden lg:block !py-4 lg:!py-2"
             onMouseEnter={() => setIsMoreOpen(true)}
             onMouseLeave={() => setIsMoreOpen(false)}
           >

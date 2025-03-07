@@ -44,7 +44,7 @@ const Home = () => {
       <div className="!mt-4">
         <BreakingSlider articles={data} />
       </div>
-      <div className="flex gap-4 !px-6 !py-10 bg-white">
+      <div className="flex gap-4 !px-3 lg:!px-6 !py-10 bg-white">
         <main className="flex flex-col gap-8 md:gap-10">
           <section className="flex flex-col md:flex-row md:items-center gap-10">
             <div className="w-full md:w-3/5">
@@ -55,7 +55,7 @@ const Home = () => {
             </div>
           </section>
 
-          <section className="flex flex-col md:flex-row gap-10">
+          <section className="flex flex-col md:flex-row">
             {/* National News */}
             <div className="flex flex-col gap-5">
               <div className="flex justify-between items-center">
@@ -135,7 +135,7 @@ const Home = () => {
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">Technology</h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                  <Link to="/science" className="text-sm font-medium">
+                  <Link to="/technology" className="text-sm font-medium">
                     Show More
                   </Link>
                   <svg
@@ -244,7 +244,7 @@ const Home = () => {
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">Lifestyle</h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                  <Link to="/health" className="text-sm font-medium">
+                  <Link to="/lifestyle" className="text-sm font-medium">
                     Show More
                   </Link>
                   <svg
