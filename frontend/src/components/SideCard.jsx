@@ -17,43 +17,44 @@ const SideCard = ({ article }) => {
     : "../../tech.jpg";
 
   return (
-    <Link to={`/article/${id}`} className="block">
-      <div className="rounded-lg flex gap-3 overflow-hidden bg-white group">
-        {/* Article Details */}
-        <div className="flex flex-col justify-center gap-1 w-1/2">
-          <div className="flex flex-col xs:inline md:flex text-sm text-gray-600">
-            <span>{author || "Unknown Author"}</span>
-            <span className="hidden xs:inline md:hidden"> | </span>
-            <span>{formattedcreatedAt}</span>
-          </div>
-
-          <h3 className="text-base font-medium sidecard-title">
-            {title}
-          </h3>
-
-          <div className="flex flex-col xs:inline md:flex xl:inline text-sm text-gray-600">
-            <span className="text-red-700 font-medium ">
-              {category || "General"}
-            </span>
-            <span className="hidden xs:inline md:hidden xl:inline"> | </span>
-            <span className="">
-              {timeToRead
-                ? `${timeToRead} min read`
-                : "Reading time unavailable"}
-            </span>
-          </div>
+    <div className="rounded-lg flex gap-3 overflow-hidden bg-white">
+      {/* Article Details */}
+      <div className="flex flex-col justify-center gap-1 w-1/2">
+        <div className="flex flex-col xs:inline md:flex text-sm text-gray-600">
+          <span>{author || "Unknown Author"}</span>
+          <span className="hidden xs:inline md:hidden"> | </span>
+          <span>{formattedcreatedAt}</span>
         </div>
 
-        {/* Article Image */}
-        <div className="w-1/2 relative overflow-hidden rounded-lg">
-          <img
-            src={coverImageUrl}
-            className="w-full object-cover h-full rounded-lg transform transition-transform duration-500 group-hover:scale-110"
-            alt={title}
-          />
+        <Link
+          to={`/article/${id}`}
+          className="text-base font-medium sidecard-title hover:underline"
+        >
+          {title}
+        </Link>
+
+        <div className="flex flex-col xs:inline md:flex xl:inline text-sm text-gray-600">
+          <span className="text-red-700 font-medium ">
+            {category || "General"}
+          </span>
+          <span className="hidden xs:inline md:hidden xl:inline"> | </span>
+          <span className="">
+            {timeToRead ? `${timeToRead} min read` : "Reading time unavailable"}
+          </span>
         </div>
       </div>
-    </Link>
+
+      {/* Article Image */}
+      <div className="w-1/2 relative overflow-hidden rounded-lg">
+        <Link to={`/article/${id}`}>
+          <img
+            src={coverImageUrl}
+            className="w-full object-cover h-full rounded-lg transform transition-transform duration-500 hover:scale-110"
+            alt={title}
+          />
+        </Link>
+      </div>
+    </div>
   );
 };
 

@@ -198,7 +198,7 @@ const Home = () => {
               </div>
               {
                 <FullCard
-                  articles={filterArticlesByCategory("Business").slice(0, 1)}
+                  articles={filterArticlesByCategory("Business").slice(0, 5)}
                 />
               }
             </div>

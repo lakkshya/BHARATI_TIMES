@@ -8,7 +8,31 @@ const CurrentIssue = () => {
       title: "Newspaper 1",
       date: "2025-02-07",
       pdfLink: "/Volume-1-Issue-63.pdf",
-    }
+    },
+    {
+      id: 2,
+      title: "Newspaper 2",
+      date: "2025-02-06",
+      pdfLink: "/Volume-1-Issue-64.pdf",
+    },
+    {
+      id: 3,
+      title: "Newspaper 3",
+      date: "2025-02-05",
+      pdfLink: "/Volume-1-Issue-65.pdf",
+    },
+    {
+      id: 4,
+      title: "Newspaper 4",
+      date: "2025-02-04",
+      pdfLink: "/Volume-1-Issue-66.pdf",
+    },
+    {
+      id: 5,
+      title: "Newspaper 5",
+      date: "2025-02-03",
+      pdfLink: "/Volume-1-Issue-67.pdf",
+    },
   ];
 
   useEffect(() => {
@@ -24,8 +48,8 @@ const CurrentIssue = () => {
           </h2>
         </div>
 
-        <section className="flex flex-col gap-10 !px-30 sm:!px-50 md:!px-70 lg:!px-100">
-          <div className="grid grid-cols-1 gap-8">
+        <section className="flex flex-col gap-10">
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
             {newspapers.map((paper) => (
               <PdfCard
                 key={paper.id}

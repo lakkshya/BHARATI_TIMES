@@ -25,45 +25,46 @@ const MidCard = ({ article }) => {
     : "../../tech.jpg";
 
   return (
-    <Link to={`/article/${id}`} className="block">
-      <div className="rounded-lg flex flex-col overflow-hidden bg-white gap-y-4 group">
-        {/* Article Image */}
-        <div className="relative overflow-hidden rounded-lg">
+    <div className="rounded-lg flex flex-col overflow-hidden bg-white gap-y-4">
+      {/* Article Image */}
+      <div className="relative overflow-hidden rounded-lg">
+        <Link to={`/article/${id}`}>
           <img
             src={coverImageUrl}
-            className="w-full h-40 object-cover object-top rounded-lg transform transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-40 object-cover object-top rounded-lg transform transition-transform duration-500 hover:scale-110"
             alt={title}
           />
+        </Link>
+      </div>
+
+      {/* Article Details */}
+      <div className="flex flex-col justify-center gap-1">
+        <div className="inline text-sm text-gray-600">
+          <span>{author || "Unknown Author"}</span>
+          <span className="inline"> | </span>
+          <span>{formattedcreatedAt}</span>
         </div>
 
-        {/* Article Details */}
-        <div className="flex flex-col justify-center gap-1">
-          <div className="inline text-sm text-gray-600">
-            <span>{author || "Unknown Author"}</span>
-            <span className="inline"> | </span>
-            <span>{formattedcreatedAt}</span>
-          </div>
+        <Link
+          to={`/article/${id}`}
+          className="text-base font-medium midcard-title hover:underline"
+        >
+          {title}
+        </Link>
 
-          <h3 className="text-base font-medium midcard-title">{title}</h3>
+        <p className="text-sm text-gray-600 midcard-para">{body}</p>
 
-          <p className="text-sm text-gray-600 midcard-para">
-            {body}
-          </p>
-
-          <div className="inline text-sm text-gray-600">
-            <span className="text-red-700 font-medium">
-              {category || "General"}
-            </span>
-            <span className="inline"> | </span>
-            <span className="">
-              {timeToRead
-                ? `${timeToRead} min read`
-                : "Reading time unavailable"}
-            </span>
-          </div>
+        <div className="inline text-sm text-gray-600">
+          <span className="text-red-700 font-medium">
+            {category || "General"}
+          </span>
+          <span className="inline"> | </span>
+          <span className="">
+            {timeToRead ? `${timeToRead} min read` : "Reading time unavailable"}
+          </span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

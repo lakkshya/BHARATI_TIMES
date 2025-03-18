@@ -31,8 +31,8 @@ const FullCard = ({ articles }) => {
     : "../../tech.jpg";
 
   return (
-    <Link to={`/article/${id}`} className="block">
-      <div className="relative w-full">
+    <div className="relative w-full">
+      <Link to={`/article/${id}`} className="block">
         {/* Card */}
         <div className="relative rounded-lg overflow-hidden bg-white text-white h-80 lg:h-100 xl:h-80 group">
           {/* Background Image */}
@@ -50,9 +50,7 @@ const FullCard = ({ articles }) => {
               <span className="hidden xs:inline"> | </span>
               <span>{formattedcreatedAt}</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-medium">
-              {title}
-            </h3>
+            <h3 className="text-xl sm:text-2xl font-medium">{title}</h3>
             <div className="flex flex-col xs:inline text-sm md:text-base">
               <span className="text-red-400 font-medium">
                 {category || "General"}
@@ -66,50 +64,50 @@ const FullCard = ({ articles }) => {
             </div>
           </div>
         </div>
+      </Link>
 
-        {/* Navigation Buttons */}
-        <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full !px-4">
-          <button
-            className="absolute top-1/2 left-8 -translate-1/2 bg-gray-700 text-white w-8 h-8 rounded-full flex justify-center items-center cursor-pointer z-10 hover:bg-gray-500"
-            onClick={prevSlide}
+      {/* Navigation Buttons */}
+      <div className="absolute top-1/2 -translate-y-1/2 flex justify-between w-full !px-4">
+        <button
+          className="absolute top-1/2 left-8 -translate-1/2 bg-gray-700 text-white w-8 h-8 rounded-full flex justify-center items-center cursor-pointer z-10 hover:bg-gray-500"
+          onClick={prevSlide}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 19.5 8.25 12l7.5-7.5"
-              />
-            </svg>
-          </button>
-          <button
-            className="absolute top-1/2 right-1 -translate-1/2 bg-gray-700 text-white w-8 h-8 rounded-full flex justify-center items-center cursor-pointer z-10 hover:bg-gray-500"
-            onClick={nextSlide}
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 19.5 8.25 12l7.5-7.5"
+            />
+          </svg>
+        </button>
+        <button
+          className="absolute top-1/2 right-1 -translate-1/2 bg-gray-700 text-white w-8 h-8 rounded-full flex justify-center items-center cursor-pointer z-10 hover:bg-gray-500"
+          onClick={nextSlide}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </button>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+            />
+          </svg>
+        </button>
       </div>
-    </Link>
+    </div>
   );
 };
 

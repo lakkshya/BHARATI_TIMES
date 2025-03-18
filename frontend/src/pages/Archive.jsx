@@ -48,7 +48,7 @@ const Archive = () => {
         </div>
 
         <section className="flex flex-col gap-10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
             {newspapers.map((paper) => (
               <PdfCard
                 key={paper.id}

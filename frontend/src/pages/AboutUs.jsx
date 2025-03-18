@@ -62,8 +62,8 @@ const AboutUs = () => {
   ];
 
   useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="flex flex-col bg-white">
@@ -92,31 +92,39 @@ const AboutUs = () => {
       <section className="flex flex-col lg:flex-row gap-8 !px-6 md:!px-20 !py-16">
         {/* Heading first on small screens */}
         <div className="lg:hidden flex items-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
+          <h2 className="text-xl md:text-3xl font-semibold text-gray-800">
             Our Mission
           </h2>
         </div>
 
         <div className="lg:w-3/4">
           <ul className="!space-y-4 text-gray-700">
-            <li className="flex items-center gap-3 text-base md:text-lg font-medium">
+            <li className="flex items-center gap-3">
               <Microscope className="w-6 h-6 text-red-600" />
-              Provide factual, well-researched, and reliable news content.
+              <span className="text-sm xs:text-base md:text-lg font-medium">
+                Provide factual, well-researched, and reliable news content.
+              </span>
             </li>
-            <li className="flex items-center gap-3 text-base md:text-lg font-medium">
+            <li className="flex items-center gap-3">
               <Newspaper className="w-6 h-6 text-blue-600" />
-              Keep our readers informed about current events, trends, and
-              developments across industries.
+              <span className="text-sm xs:text-base md:text-lg font-medium">
+                Keep our readers informed about current events, trends, and
+                developments across industries.
+              </span>
             </li>
-            <li className="flex items-center gap-3 text-base md:text-lg font-medium">
+            <li className="flex items-center gap-3">
               <Binoculars className="w-6 h-6 text-green-600" />
-              Offer in-depth analysis to help you understand complex global
-              issues.
+              <span className="text-sm xs:text-base md:text-lg font-medium">
+                Offer in-depth analysis to help you understand complex global
+                issues.
+              </span>
             </li>
-            <li className="flex items-center gap-3 text-base md:text-lg font-medium">
+            <li className="flex items-center gap-3">
               <KeyRound className="w-6 h-6 text-pink-600" />
-              Uphold the principles of journalistic integrity, transparency, and
-              objectivity.
+              <span className="text-sm xs:text-base md:text-lg font-medium">
+                Uphold the principles of journalistic integrity, transparency,
+                and objectivity.
+              </span>
             </li>
           </ul>
         </div>
@@ -130,7 +138,7 @@ const AboutUs = () => {
       </section>
 
       <section className="flex flex-col gap-8 bg-red-700 !px-6 md:!px-20 !py-16 text-white">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center">
+        <h2 className="text-xl md:text-3xl font-semibold text-center">
           What We Cover
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -141,7 +149,7 @@ const AboutUs = () => {
             >
               {item.icon}
               <h2 className="text-lg font-semibold">{item.title}</h2>
-              <p className="text-base text-gray-600">{item.desc}</p>
+              <p className="text-sm xs:text-base text-gray-600">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -149,7 +157,7 @@ const AboutUs = () => {
 
       <section className="flex flex-col lg:flex-row gap-8 !px-6 md:!px-20 !py-16">
         <div className="flex items-center lg:w-1/4 lg:border-r-4">
-          <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
+          <h2 className="text-xl md:text-3xl font-semibold text-gray-800">
             Why Choose BharatiTimes?
           </h2>
         </div>
@@ -158,27 +166,27 @@ const AboutUs = () => {
           <ul className="!space-y-4 text-gray-700">
             <li className="flex items-center gap-3">
               <FileCheck className="w-6 h-6 text-red-600" />
-              <span className="text-base md:text-lg font-medium">
+              <span className="text-sm xs:text-base md:text-lg font-medium">
                 Accuracy & Credibility – We fact-check all information before
                 publishing.
               </span>
             </li>
             <li className="flex items-center gap-3">
               <Fan className="w-6 h-6 text-blue-600" />
-              <span className="text-base md:text-lg font-medium">
+              <span className="text-sm xs:text-base md:text-lg font-medium">
                 Unbiased Reporting – Our news is free from political and
                 corporate influence.
               </span>
             </li>
             <li className="flex items-center gap-3">
               <AlarmClockCheck className="w-6 h-6 text-green-600" />
-              <span className="text-base md:text-lg font-medium">
+              <span className="text-sm xs:text-base md:text-lg font-medium">
                 Timely Updates – We bring you breaking news as it happens.
               </span>
             </li>
             <li className="flex items-center gap-3">
               <Users className="w-6 h-6 text-pink-600" />
-              <span className="text-base md:text-lg font-medium">
+              <span className="text-sm xs:text-base md:text-lg font-medium">
                 Reader-Centric Approach – We value your opinions and strive to
                 serve content that matters.
               </span>
@@ -188,12 +196,12 @@ const AboutUs = () => {
       </section>
 
       <section className="flex flex-col gap-8 md:gap-16 bg-blue-950 text-white !px-6 md:!px-20 !py-10">
-        <h2 className="text-2xl md:text-3xl font-semibold text-center">
+        <h2 className="text-xl md:text-3xl font-semibold text-center">
           Join Our Community
         </h2>
         <div className="flex flex-col md:flex-row gap-6 items-center">
           <div className="w-full md:w-3/5">
-            <p className="text-base text-center md:text-xl md:text-left text-gray-300">
+            <p className="text-sm xs:text-base text-center md:text-xl md:text-left text-gray-300">
               We believe news should be a conversation, not a monologue.
               Subscribe to our newsletters, and become part of our growing
               community. Your feedback, opinions, and participation help us
@@ -211,7 +219,7 @@ const AboutUs = () => {
               />
               <button
                 type="submit"
-                className="bg-red-600 hover:bg-red-700 text-white font-semibold !py-2 !px-6 rounded-lg shadow-md w-full"
+                className="bg-red-600 hover:bg-red-700 text-white font-medium !py-2 !px-6 rounded-lg shadow-md w-full"
               >
                 Subscribe to Newsletter
               </button>
@@ -219,14 +227,12 @@ const AboutUs = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <p className="text-center text-base md:text-lg">
+        <div className="flex flex-col gap-2 text-center text-sm xs:text-base md:text-lg">
+          <p className="">
             Thank You for Choosing BharatiTimes! We are honored to be your go-to
             source for news and information.
           </p>
-          <p className="text-center text-base md:text-lg">
-            💡 Stay informed, stay empowered! 🚀
-          </p>
+          <p className="">💡 Stay informed, stay empowered! 🚀</p>
         </div>
       </section>
     </div>
