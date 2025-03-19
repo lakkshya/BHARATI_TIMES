@@ -1,41 +1,137 @@
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const [dateTime, setDateTime] = useState(new Date());
+  const [formattedDate, setFormattedDate] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  // Function to update the date
+  const updateDate = () => {
+    const today = new Date().toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    setFormattedDate(today);
+  };
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setDateTime(new Date());
-    }, 1000);
+    updateDate();
 
-    return () => clearInterval(timer);
+    // Update date at midnight
+    const now = new Date();
+    const timeUntilMidnight =
+      new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) - now;
+
+    const midnightTimeout = setTimeout(() => {
+      updateDate();
+      setInterval(updateDate, 24 * 60 * 60 * 1000);
+    }, timeUntilMidnight);
+
+    return () => clearTimeout(midnightTimeout);
   }, []);
 
-  const formattedDate = dateTime.toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  useEffect(() => {
+    // Check for token initially
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token); // Convert token to boolean
 
-  const formattedTime = dateTime.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
+    // Listen for login state change
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem("token"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/");
+    window.dispatchEvent(new Event("storage")); // Notify other components
+  };
 
   return (
-    <header className="block sm:flex justify-center sm:justify-between !px-6 !py-4">
+    <header className="block sm:flex justify-center sm:justify-between !px-3 lg:!px-6 !py-4">
+      {/* Left Logo - Hidden on Small Screens */}
       <div className="hidden lg:flex items-center w-1/5">
-        <img className="w-40" src="../../logoo.png" alt="" />
+        <img
+          className="w-40 h-auto"
+          src="../../logoo.png"
+          alt="bvp-logo"
+          loading="lazy"
+        />
       </div>
-      <div className="flex justify-center w-full sm:w-1/3 lg:w-2/5">
-        <img src="../../logo.png" alt="bharati-times-logo" loading="lazy" />
+
+      {/* Center Section (Logo + Date & Sign-in for Small Screens) */}
+      <div className="flex flex-col items-center sm:flex-row sm:justify-between w-full sm:w-1/2 lg:w-2/5">
+        <div className="flex justify-center w-full sm:w-auto">
+          <img
+            src="../../logo.png"
+            alt="bharati-times-logo"
+            loading="lazy"
+            className="h-auto w-auto max-w-full object-contain mx-auto"
+          />
+        </div>
+
+        {/* Date & Sign In/My Account Button (Stacked on Small Screens) */}
+        <div className="flex justify-end sm:hidden items-center w-full !mt-2">
+          {isLoggedIn ? (
+            <div className="flex items-center gap-2">
+              <Link
+                to="/account"
+                className="!mt-1 !py-[0.35rem] !px-[0.5rem] bg-green-800 text-white text-[0.75rem] sm:text-sm font-medium rounded-sm hover:bg-green-900"
+              >
+                My Account
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="!mt-1 !py-[0.35rem] !px-[0.5rem] bg-red-800 text-white text-[0.75rem] sm:text-sm font-medium rounded-sm hover:bg-red-900"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="!mt-1 !py-[0.35rem] !px-[0.5rem] bg-blue-800 text-white text-[0.75rem] sm:text-sm font-medium rounded-sm hover:bg-gray-800"
+            >
+              Sign In
+            </Link>
+          )}
+        </div>
       </div>
-      <div className="hidden sm:flex sm:flex-col justify-center items-end gap-1 sm:w-1/3 lg:w-1/5 text-sm font-bold text-gray-700">
-        <p className="text-right">{formattedDate}</p>
-        <p className="text-right">{formattedTime}</p>
+
+      {/* Right Section - Only Visible on `sm` and Larger */}
+      <div className="hidden sm:flex sm:flex-col justify-center items-end gap-2 sm:w-1/2 lg:w-1/5">
+        <p className="text-sm font-medium text-gray-700">{formattedDate}</p>
+        {isLoggedIn ? (
+          <div className="flex items-center gap-2">
+            <Link
+              to="/account"
+              className="!py-[0.35rem] !px-[0.5rem] bg-green-800 text-white text-sm font-medium rounded-sm hover:bg-green-900"
+            >
+              My Account
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="!py-[0.35rem] !px-[0.5rem] bg-red-800 text-white text-sm font-medium rounded-sm hover:bg-red-900"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <Link
+            to="/login"
+            className="!py-[0.35rem] !px-[0.5rem] bg-blue-800 text-white text-sm font-medium rounded-sm hover:bg-gray-800"
+          >
+            Sign In
+          </Link>
+        )}
       </div>
     </header>
   );

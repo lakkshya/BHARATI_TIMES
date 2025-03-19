@@ -17,6 +17,7 @@ import Archive from "./pages/Archive";
 import Login from "./pages/Login";
 import Footer from './components/Footer'
 import SignUp from "./pages/SignUp";
+import EmailConfirmed from "./pages/EmailConfirmed";
 import Article from "./pages/Article";
 
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/archive" element={<Archive />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/email-confirmed" element={<EmailConfirmed />} />
         <Route path="/article/:id" element={<Article />} />
       </Routes>
       <Footer />

@@ -95,11 +95,11 @@ const ContactUs = () => {
 
   return (
     <div className="flex justify-center items-center bg-white !px-3 lg:!px-6 !py-10">
-      <div className="bg-white !p-5 sm:!p-8 rounded-lg shadow-lg border border-gray-200">
-        <h2 className="text-lg md:text-xl font-medium !mb-6">Contact Us</h2>
+      <div className="w-full xs:w-2/3 bg-white !p-5 sm:!p-8 rounded-lg shadow-lg border border-gray-200">
+        <h2 className="text-lg md:text-xl font-medium text-gray-800 !mb-6">Contact Us</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-sm">
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <div>
+            <div className="md:w-1/2">
               <input
                 type="text"
                 placeholder="Name"
@@ -107,13 +107,13 @@ const ContactUs = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full !p-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full !p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
               />
               {errors.name && (
                 <p className="text-red-500 text-xs">{errors.name}</p>
               )}
             </div>
-            <div>
+            <div className="md:w-1/2">
               <input
                 type="email"
                 placeholder="Email Address"
@@ -121,7 +121,7 @@ const ContactUs = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full !p-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full !p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
               />
               {errors.email && (
                 <p className="text-red-500 text-xs">{errors.email}</p>
@@ -129,7 +129,7 @@ const ContactUs = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <div>
+            <div className="md:w-1/2">
               <input
                 type="tel"
                 placeholder="Contact Number"
@@ -137,13 +137,13 @@ const ContactUs = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, contactNumber: e.target.value })
                 }
-                className="w-full !p-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full !p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
               />
               {errors.contactNumber && (
                 <p className="text-red-500 text-xs">{errors.contactNumber}</p>
               )}
             </div>
-            <div>
+            <div className="md:w-1/2">
               <input
                 type="text"
                 placeholder="Location"
@@ -151,7 +151,7 @@ const ContactUs = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, location: e.target.value })
                 }
-                className="w-full !p-2 border text-md border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+                className="w-full !p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
               />
               {errors.location && (
                 <p className="text-red-500 text-xs">{errors.location}</p>
@@ -166,7 +166,7 @@ const ContactUs = () => {
               onChange={(e) =>
                 setFormData({ ...formData, subject: e.target.value })
               }
-              className="w-full !p-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+              className="w-full !p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
             />
             {errors.subject && (
               <p className="text-red-500 text-xs">{errors.subject}</p>
@@ -180,29 +180,31 @@ const ContactUs = () => {
               onChange={(e) =>
                 setFormData({ ...formData, message: e.target.value })
               }
-              className="w-full !p-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+              className="w-full !p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
             />
             {errors.message && (
               <p className="text-red-500 text-xs">{errors.message}</p>
             )}
           </div>
           <div>
-            <span className="text-md text-gray-800">{captchaQuestion}</span>
-            <input
-              type="text"
-              value={captchaInput}
-              onChange={(e) => setCaptchaInput(e.target.value)}
-              placeholder="Answer"
-              className="w-full !p-2 text-md border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
-              maxLength={3}
-            />
+            <div className="flex flex-col gap-2">
+              <span className="text-gray-800">{captchaQuestion}</span>
+              <input
+                type="text"
+                value={captchaInput}
+                onChange={(e) => setCaptchaInput(e.target.value)}
+                placeholder="Answer"
+                className="!p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
+                maxLength={3}
+              />
+            </div>
             {captchaError && (
               <p className="text-red-500 text-xs">{captchaError}</p>
             )}
           </div>
           <button
             type="submit"
-            className="w-full !p-2 text-md bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-700 focus:outline-none"
+            className="w-full !p-2 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-700 focus:outline-none"
           >
             Submit
           </button>

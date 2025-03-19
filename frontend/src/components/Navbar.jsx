@@ -18,34 +18,45 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="bg-gray-300 flex flex-col lg:block items-end relative">
+      <nav className="bg-gray-200 border-y border-gray-400 flex flex-col lg:block items-end top-0 w-full z-40 sticky">
         {/* Mobile Header */}
         <div className="flex lg:hidden justify-between sm:justify-end w-full">
           <div className="flex items-center sm:hidden !px-3 lg:!px-6 text-gray-900 text-sm">
-            <p className="text-sm font-bold text-gray-700">{formattedDate}</p>
+            <p className="text-sm font-medium text-gray-700">{formattedDate}</p>
           </div>
           <div className="cursor-pointer !px-3 lg:!px-6 !py-2" onClick={toggleMenu}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-6 text-gray-900"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
+            {isMenuOpen ? (
+              // Cross Icon when Menu is Open
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                className="size-6 text-gray-900 transition-all duration-300 ease-in-out"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              // Hamburger Menu when Closed
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                className="size-6 text-gray-900 transition-all duration-300 ease-in-out"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+            )}
           </div>
         </div>
 
         {/* Main Navigation */}
         <ul
-          className={`lg:flex justify-between text-sm text-gray-700 !px-3 lg:!px-6 ${
-            isMenuOpen ? "block" : "hidden"
+          className={`lg:flex justify-between text-sm text-gray-700 !px-3 lg:!px-6 transition-all duration-300 ease-in-out ${
+            isMenuOpen ? "block opacity-100" : "hidden opacity-0 lg:opacity-100"
           }`}
         >
           {[
@@ -73,13 +84,12 @@ const Navbar = () => {
           ))}
 
           {/* More items for small screens (No dropdown) */}
-          <div className="lg:hidden">
+          <div className="lg:hidden !pb-2">
             {[
               { path: "/aboutus", label: "About" },
               { path: "/contactus", label: "Contact" },
               { path: "/currentissue", label: "Current Issue" },
               { path: "/archive", label: "Archive" },
-              { path: "/login", label: "Login" },
             ].map(({ path, label }) => (
               <li key={path} className="text-right !mb-2">
                 <NavLink
@@ -111,18 +121,14 @@ const Navbar = () => {
                 stroke="currentColor"
                 strokeWidth={2}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
             {/* Dropdown Menu (Aligned to Right) */}
             <ul
-              className={`absolute right-0 !mt-2 w-48 bg-gray-300 text-gray-700 border border-gray-500 shadow-lg z-50 rounded-md transition-all ${
-                isMoreOpen ? "block" : "hidden"
+              className={`absolute right-0 !mt-2 w-48 bg-gray-300 text-gray-700 border border-gray-500 shadow-lg z-50 rounded-md transition-all duration-300 ease-in-out ${
+                isMoreOpen ? "block opacity-100 scale-100" : "hidden opacity-0 scale-95"
               }`}
             >
               {[
@@ -130,12 +136,8 @@ const Navbar = () => {
                 { path: "/contactus", label: "Contact" },
                 { path: "/currentissue", label: "Current Issue" },
                 { path: "/archive", label: "Archive" },
-                { path: "/login", label: "Login" },
               ].map(({ path, label }) => (
-                <li
-                  key={path}
-                  className=""
-                >
+                <li key={path}>
                   <NavLink
                     to={path}
                     className="block !px-4 !py-2 hover:text-gray-900 hover:font-medium"
