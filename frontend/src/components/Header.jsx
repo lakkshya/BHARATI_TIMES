@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import useAuth from "../context/useAuth";
 
 const Header = () => {
   const [formattedDate, setFormattedDate] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const navigate = useNavigate();
+  const { isLoggedIn } = useAuth();
 
   // Function to update the date
   const updateDate = () => {
@@ -24,7 +24,8 @@ const Header = () => {
     // Update date at midnight
     const now = new Date();
     const timeUntilMidnight =
-      new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) - now;
+      new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) -
+      now;
 
     const midnightTimeout = setTimeout(() => {
       updateDate();
@@ -33,27 +34,6 @@ const Header = () => {
 
     return () => clearTimeout(midnightTimeout);
   }, []);
-
-  useEffect(() => {
-    // Check for token initially
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token); // Convert token to boolean
-
-    // Listen for login state change
-    const handleStorageChange = () => {
-      setIsLoggedIn(!!localStorage.getItem("token"));
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    navigate("/");
-    window.dispatchEvent(new Event("storage")); // Notify other components
-  };
 
   return (
     <header className="block sm:flex justify-center sm:justify-between !px-3 lg:!px-6 !py-4">
@@ -81,20 +61,12 @@ const Header = () => {
         {/* Date & Sign In/My Account Button (Stacked on Small Screens) */}
         <div className="flex justify-end sm:hidden items-center w-full !mt-2">
           {isLoggedIn ? (
-            <div className="flex items-center gap-2">
-              <Link
-                to="/account"
-                className="!mt-1 !py-[0.35rem] !px-[0.5rem] bg-green-800 text-white text-[0.75rem] sm:text-sm font-medium rounded-sm hover:bg-green-900"
-              >
-                My Account
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="!mt-1 !py-[0.35rem] !px-[0.5rem] bg-red-800 text-white text-[0.75rem] sm:text-sm font-medium rounded-sm hover:bg-red-900"
-              >
-                Logout
-              </button>
-            </div>
+            <Link
+              to="/account"
+              className="!mt-1 !py-[0.35rem] !px-[0.5rem] bg-blue-800 text-white text-[0.75rem] sm:text-sm font-medium rounded-sm hover:bg-gray-800"
+            >
+              My Account
+            </Link>
           ) : (
             <Link
               to="/login"
@@ -110,20 +82,12 @@ const Header = () => {
       <div className="hidden sm:flex sm:flex-col justify-center items-end gap-2 sm:w-1/2 lg:w-1/5">
         <p className="text-sm font-medium text-gray-700">{formattedDate}</p>
         {isLoggedIn ? (
-          <div className="flex items-center gap-2">
-            <Link
-              to="/account"
-              className="!py-[0.35rem] !px-[0.5rem] bg-green-800 text-white text-sm font-medium rounded-sm hover:bg-green-900"
-            >
-              My Account
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="!py-[0.35rem] !px-[0.5rem] bg-red-800 text-white text-sm font-medium rounded-sm hover:bg-red-900"
-            >
-              Logout
-            </button>
-          </div>
+          <Link
+            to="/account"
+            className="!py-[0.35rem] !px-[0.5rem] bg-blue-800 text-white text-sm font-medium rounded-sm hover:bg-gray-800"
+          >
+            My Account
+          </Link>
         ) : (
           <Link
             to="/login"

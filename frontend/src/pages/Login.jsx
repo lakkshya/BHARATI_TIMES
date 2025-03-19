@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../context/useAuth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate(); // Use navigate hook
 
   const handleSubmit = async (e) => {
@@ -27,14 +29,8 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        console.log("User:", data.user);
-        console.log("JWT Token:", data.jwt);
-
-        // Store the token
-        localStorage.setItem("token", data.jwt);
-
-        // Show success popup
-        setShowPopup(true);
+        login(data.user, data.jwt); // Store user and token in context
+        setShowPopup(true);  // Show success popup
       } else {
         setError(data?.error?.message || "Invalid email or password.");
       }
