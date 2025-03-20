@@ -212,12 +212,12 @@ const ContactUs = () => {
       </div>
 
       {successMessage && (
-        <div className="fixed inset-0 flex items-center justify-center">
+        <div className="fixed inset-0 flex items-center justify-center z-50">
           {/* Background Overlay */}
           <div className="absolute inset-0 bg-black opacity-50"></div>
 
           {/* Popup Modal */}
-          <div className="relative bg-white !p-6 rounded-lg shadow-lg z-10">
+          <div className="relative bg-white !p-6 rounded-lg shadow-lg z-50">
             <p className="text-green-600">{successMessage}</p>
             <button
               onClick={handleSuccessClose}
