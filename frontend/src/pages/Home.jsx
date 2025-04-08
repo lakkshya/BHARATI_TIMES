@@ -16,7 +16,21 @@ const Home = () => {
   );
 
   const filterArticlesByCategory = (category) => {
-    return data.filter((article) => article.category === category);
+    const sortedArticles = Array.isArray(data)
+      ? [...data]
+          .filter((article) => article.category === category)
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      : [];
+
+    const topStories = sortedArticles.filter((article) => article.topStory);
+
+    if (topStories.length >= 6) {
+      return topStories.slice(0, 6);
+    }
+
+    const others = sortedArticles.filter((article) => !article.topStory);
+
+    return [...topStories, ...others].slice(0, 6);
   };
 
   useEffect(() => {

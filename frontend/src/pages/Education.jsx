@@ -27,6 +27,29 @@ const Education = () => {
     shuffledArticles = [...filteredArticles].sort(() => 0.5 - Math.random());
   }
 
+  const sortedEducationArticles = Array.isArray(data)
+    ? [...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    : [];
+
+  // Filter for top stories
+  const topStories = sortedEducationArticles.filter(
+    (article) => article.topStory
+  );
+
+  // Use first 4 top stories for MidCard
+  const top4 =
+    topStories.length >= 4
+      ? topStories.slice(0, 4)
+      : sortedEducationArticles.slice(0, 4);
+
+  const topIds = top4.map((a) => a.id);
+
+  const restArticles = sortedEducationArticles.filter(
+    (article) => !topIds.includes(article.id)
+  );
+
+  const next6 = restArticles.slice(0, 6);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -68,7 +91,7 @@ const Education = () => {
         <section className="flex flex-col md:flex-row gap-10">
           <div className="flex flex-col gap-5">
             <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-5">
-              {data.slice(0, 4).map((article) => (
+              {top4.map((article) => (
                 <MidCard key={article.id} article={article} />
               ))}
             </div>
@@ -77,7 +100,7 @@ const Education = () => {
 
         <section className="flex flex-col md:flex-row gap-10">
           <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-            {data.slice(4, 10).map((article) => (
+            {next6.map((article) => (
               <SmallCard key={article.id} article={article} />
             ))}
           </div>

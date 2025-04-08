@@ -437,6 +437,9 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         number
       >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+    topStory: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

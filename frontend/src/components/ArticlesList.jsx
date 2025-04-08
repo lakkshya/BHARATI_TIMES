@@ -23,7 +23,11 @@ const ArticlesList = ({ articles }) => {
     setCurrentPage(newPage);
   };
 
-  const paginatedArticles = articles.slice(
+  const sortedArticles = [...articles].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
+  const paginatedArticles = sortedArticles.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
   );
@@ -95,7 +99,9 @@ const ArticlesList = ({ articles }) => {
               <button
                 onClick={() => handlePageChange(totalPages)}
                 className={`text-base hover:underline cursor-pointer ${
-                  currentPage === totalPages ? "text-black underline" : "text-gray-700"
+                  currentPage === totalPages
+                    ? "text-black underline"
+                    : "text-gray-700"
                 }`}
               >
                 {totalPages}

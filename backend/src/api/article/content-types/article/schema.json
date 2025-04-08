@@ -45,6 +45,11 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "topStory": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }
