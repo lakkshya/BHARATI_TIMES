@@ -19,13 +19,23 @@ const SignUp = () => {
     setErrorMessage("");
     setSuccessMessage("");
 
+    // Custom validation
+    if (!formData.username || !formData.email || !formData.password) {
+      setErrorMessage("Please fill in all the fields.");
+      return;
+    }
+
     try {
       const response = await fetch(
         "http://localhost:1337/api/auth/local/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            username: formData.username, // Ensure these match Strapi's expected fields
+            email: formData.email,
+            password: formData.password,
+          }),
         }
       );
 
@@ -34,9 +44,7 @@ const SignUp = () => {
       console.log("Response data:", data);
 
       if (response.ok) {
-        setSuccessMessage(
-          "Account created! Check your email for a confirmation link."
-        );
+        setSuccessMessage("Account created! Sign In now.");
         setFormData({ username: "", email: "", password: "" }); // Reset form
       } else {
         setErrorMessage(data?.error?.message || "Something went wrong!");
@@ -65,16 +73,15 @@ const SignUp = () => {
           {/* Full Name */}
           <div>
             <label className="block text-gray-700 font-medium !mb-1">
-              Full Name
+              Username
             </label>
             <input
               type="text"
               name="username"
               value={formData.username}
               onChange={handleChange}
-              placeholder="Enter your full name"
+              placeholder="Enter your username"
               className="w-full !px-4 !py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
             />
           </div>
 
@@ -90,7 +97,6 @@ const SignUp = () => {
               onChange={handleChange}
               placeholder="Enter your email"
               className="w-full !px-4 !py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
             />
           </div>
 
@@ -106,7 +112,6 @@ const SignUp = () => {
               onChange={handleChange}
               placeholder="Create a password"
               className="w-full !px-4 !py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
             />
           </div>
 

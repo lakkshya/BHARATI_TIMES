@@ -7,7 +7,7 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
   async find(ctx) {
     const { category } = ctx.query; // Get the category from query parameters
 
-    let filters = {}; 
+    let filters = {};
 
     if (category) {
       // If a category filter is provided, add it to the filters object

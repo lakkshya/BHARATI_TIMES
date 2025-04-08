@@ -30,7 +30,7 @@ const Login = () => {
 
       if (response.ok) {
         login(data.user, data.jwt); // Store user and token in context
-        setShowPopup(true);  // Show success popup
+        setShowPopup(true); // Show success popup
       } else {
         setError(data?.error?.message || "Invalid email or password.");
       }
@@ -97,12 +97,12 @@ const Login = () => {
           </div>
 
           <div className="flex justify-end">
-            <a
+            <Link
               className="text-[0.85rem] text-blue-500 hover:underline"
-              href="#"
+              to="/forgot-password"
             >
               Forgot Password?
-            </a>
+            </Link>
           </div>
 
           <button

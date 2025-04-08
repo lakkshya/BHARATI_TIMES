@@ -15,6 +15,8 @@ import AboutUs from "./pages/Aboutus";
 import CurrentIssue from "./pages/CurrentIssue";
 import Archive from "./pages/Archive";
 import Login from "./pages/Login";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import Footer from "./components/Footer";
 import SignUp from "./pages/SignUp";
 import EmailConfirmed from "./pages/EmailConfirmed";
@@ -41,6 +43,8 @@ function App() {
         <Route path="/currentissue" element={<CurrentIssue />} />
         <Route path="/archive" element={<Archive />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/email-confirmed" element={<EmailConfirmed />} />
         <Route path="/account" element={<MyAccount />} />

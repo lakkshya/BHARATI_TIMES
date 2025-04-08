@@ -13,6 +13,7 @@
   "dependencies": {
     "@strapi/plugin-cloud": "^5.11.3",
     "@strapi/plugin-users-permissions": "^5.11.3",
+    "@strapi/provider-email-nodemailer": "^5.12.3",
     "@strapi/strapi": "^5.11.3",
     "@vitejs/plugin-react-swc": "^3.8.1",
     "axios": "^1.8.4",

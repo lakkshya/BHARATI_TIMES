@@ -15,9 +15,9 @@ const AccountNavbar = () => {
       <ul className="!space-y-2">
         {[
           { path: "/account", label: "My Profile" },
-          { path: "/subscriptions", label: "Manage Subscriptions" },
-          { path: "/newsletters", label: "Manage Newsletters" },
-          { path: "/authors", label: "Follow Authors" },
+          // { path: "/subscriptions", label: "Manage Subscriptions" },
+          // { path: "/newsletters", label: "Manage Newsletters" },
+          // { path: "/authors", label: "Follow Authors" },
           { path: "/password-change", label: "Change Password" },
         ].map(({ path, label }) => (
           <li key={path}>
