@@ -30,7 +30,7 @@ const CurrentIssue = () => {
 
         setRecentNewspapers(sorted.slice(0, 1)); // only the most recent
       } catch (error) {
-        console.error("Error fetching recent archives:", error);
+        console.error("Error fetching current recent:", error);
       }
     };
 

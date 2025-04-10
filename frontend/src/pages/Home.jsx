@@ -69,9 +69,36 @@ const Home = () => {
             </div>
           </section>
 
-          <section className="flex flex-col md:flex-row">
+          <section className="flex flex-col md:flex-row gap-10">
+            <div className="w-full md:w-1/3 lg:w-1/4 flex flex-col gap-5">
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-medium">Current Issue</h2>
+              </div>
+              <a
+                href="/currentissue"
+                className="bg-white hover:bg-gray-100 border border-gray-400 rounded-2xl !p-4 flex flex-col gap-3"
+              >
+                <img
+                  src="./current-issue.png" // Replace with your actual cover image path
+                  alt="April 2025 Edition Cover"
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+                <div className="flex flex-col gap-1">
+                  <h3 className="text-lg font-semibold text-gray-900">
+                    April 2025 Edition
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    View the complete newspaper PDF for this month’s issue.
+                  </p>
+                  <span className="text-sm text-blue-600 font-medium !mt-2">
+                    Open PDF →
+                  </span>
+                </div>
+              </a>
+            </div>
+
             {/* National News */}
-            <div className="flex flex-col gap-5">
+            <div className="w-full md:w-2/3 lg:w-3/4 flex flex-col gap-5">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">National</h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
@@ -94,11 +121,16 @@ const Home = () => {
                   </svg>
                 </div>
               </div>
-              <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-5">
                 {filterArticlesByCategory("National")
-                  .slice(0, 4)
-                  .map((article) => (
-                    <MidCard key={article.id} article={article} />
+                  .slice(0, 3)
+                  .map((article, index) => (
+                    <div
+                      key={article.id}
+                      className={index === 2 ? "hidden lg:block" : ""}
+                    >
+                      <MidCard article={article} />
+                    </div>
                   ))}
               </div>
             </div>
