@@ -14,6 +14,7 @@ import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/Aboutus";
 import CurrentIssue from "./pages/CurrentIssue";
 import Archive from "./pages/Archive";
+import FlipbookViewer from "./pages/FlipbookViewer";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
@@ -42,6 +43,7 @@ function App() {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/currentissue" element={<CurrentIssue />} />
         <Route path="/archive" element={<Archive />} />
+        <Route path="/viewer" element={<FlipbookViewer />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />

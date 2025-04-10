@@ -23,11 +23,12 @@ const CurrentIssue = () => {
             : "#",
         }));
 
-        // Sort by newest date and take top 5
+        // Sort by newest date and take only the most recent one
         const sorted = formatted.sort(
           (a, b) => new Date(b.date) - new Date(a.date)
         );
-        setRecentNewspapers(sorted.slice(0, 5));
+
+        setRecentNewspapers(sorted.slice(0, 1)); // only the most recent
       } catch (error) {
         console.error("Error fetching recent archives:", error);
       }
@@ -38,24 +39,22 @@ const CurrentIssue = () => {
 
   return (
     <div className="flex gap-4 !px-3 lg:!px-6 !py-10 bg-white">
-      <main className="flex flex-col w-full gap-8 md:gap-10">
-        <div>
-          <h2 className="text-xl font-medium inline tracking-widest">
-            CURRENT ISSUES
+      <main className="w-full flex flex-col items-center gap-8 md:gap-10">
+        <div className="w-full xs:w-1/2 md:w-1/3 lg:w-1/4 flex justify-center">
+          <h2 className="text-xl text-center font-medium inline tracking-widest">
+            CURRENT ISSUE
           </h2>
         </div>
 
-        <section className="flex flex-col gap-10">
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-            {recentNewspapers.map((paper) => (
-              <PdfCard
-                key={paper.id}
-                title={paper.title}
-                date={paper.date}
-                pdfUrl={paper.pdfLink}
-              />
-            ))}
-          </div>
+        <section className="w-full xs:w-1/2 md:w-1/3 lg:w-1/4 flex flex-col gap-10">
+          {recentNewspapers.map((paper) => (
+            <PdfCard
+              key={paper.id}
+              title={paper.title}
+              date={paper.date}
+              pdfUrl={paper.pdfLink}
+            />
+          ))}
         </section>
       </main>
     </div>

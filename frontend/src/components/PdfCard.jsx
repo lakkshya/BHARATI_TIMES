@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import * as pdfjs from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker?url";
 
@@ -7,7 +8,8 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 const PdfCard = ({ title, date, pdfUrl }) => {
   const [imageUrl, setImageUrl] = useState("");
-  const [isLoading, setIsLoading] = useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadFirstPage = async () => {
@@ -35,21 +37,25 @@ const PdfCard = ({ title, date, pdfUrl }) => {
 
         image.onload = () => {
           setImageUrl(image.src);
-          setIsLoading(false); 
+          setIsLoading(false);
         };
       } catch (error) {
         console.error("Error loading PDF:", error);
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     };
 
     loadFirstPage();
   }, [pdfUrl]);
 
+  const handleClick = () => {
+    navigate("/viewer", { state: { pdfUrl, title, date } });
+  };
+
   return (
     <div
       className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg border border-gray-300"
-      onClick={() => window.open(pdfUrl, "_blank")}
+      onClick={handleClick}
     >
       {isLoading ? (
         <div className="w-full h-[300px] bg-gray-200 animate-pulse flex items-center justify-center">
