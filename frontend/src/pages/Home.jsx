@@ -48,7 +48,7 @@ const Home = () => {
   if (error) {
     return (
       <div className="text-center !p-8 text-red-500">
-        Error loading articles: {error}
+        Error loading articles: {error.message}
       </div>
     );
   }
@@ -79,19 +79,20 @@ const Home = () => {
                 className="bg-white hover:bg-gray-100 border border-gray-400 rounded-2xl !p-4 flex flex-col gap-3"
               >
                 <img
-                  src="./current-issue.png" // Replace with your actual cover image path
+                  loading="lazy"
+                  src="./current-issue.png"
                   alt="April 2025 Edition Cover"
                   className="w-full h-48 object-cover rounded-lg"
                 />
                 <div className="flex flex-col gap-1">
                   <h3 className="text-lg font-semibold text-gray-900">
-                    April 2025 Edition
+                    Current Edition
                   </h3>
                   <p className="text-sm text-gray-600">
                     View the complete newspaper PDF for this month’s issue.
                   </p>
                   <span className="text-sm text-blue-600 font-medium !mt-2">
-                    Open PDF →
+                    Show More
                   </span>
                 </div>
               </a>

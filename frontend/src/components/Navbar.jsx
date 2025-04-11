@@ -16,6 +16,10 @@ const Navbar = () => {
     day: "numeric",
   });
 
+  const handleStrapiLogin = () => {
+    window.open("http://localhost:1337/admin/auth/login", "_blank"); 
+  };
+
   return (
     <>
       <nav className="bg-gray-200 border-y border-gray-400 flex flex-col lg:block items-end top-0 w-full z-40 sticky">
@@ -24,9 +28,11 @@ const Navbar = () => {
           <div className="flex items-center sm:hidden !px-3 lg:!px-6 text-gray-900 text-sm">
             <p className="text-sm font-medium text-gray-700">{formattedDate}</p>
           </div>
-          <div className="cursor-pointer !px-3 lg:!px-6 !py-2" onClick={toggleMenu}>
+          <div
+            className="cursor-pointer !px-3 lg:!px-6 !py-2"
+            onClick={toggleMenu}
+          >
             {isMenuOpen ? (
-              // Cross Icon when Menu is Open
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -35,10 +41,13 @@ const Navbar = () => {
                 strokeWidth={2}
                 className="size-6 text-gray-900 transition-all duration-300 ease-in-out"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             ) : (
-              // Hamburger Menu when Closed
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -47,7 +56,11 @@ const Navbar = () => {
                 strokeWidth={1.5}
                 className="size-6 text-gray-900 transition-all duration-300 ease-in-out"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
               </svg>
             )}
           </div>
@@ -74,7 +87,11 @@ const Navbar = () => {
               <NavLink
                 to={path}
                 className={({ isActive }) =>
-                  `${isActive ? "text-gray-900 font-bold" : "hover:text-gray-900 hover:font-medium"}`
+                  `${
+                    isActive
+                      ? "text-gray-900 font-bold"
+                      : "hover:text-gray-900 hover:font-medium"
+                  }`
                 }
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -95,7 +112,11 @@ const Navbar = () => {
                 <NavLink
                   to={path}
                   className={({ isActive }) =>
-                    `${isActive ? "text-gray-700 font-bold" : "hover:text-gray-900 hover:font-medium"}`
+                    `${
+                      isActive
+                        ? "text-gray-700 font-bold"
+                        : "hover:text-gray-900 hover:font-medium"
+                    }`
                   }
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -103,6 +124,14 @@ const Navbar = () => {
                 </NavLink>
               </li>
             ))}
+            <li className="text-right !mb-2">
+              <button
+                onClick={handleStrapiLogin}
+                className="hover:text-gray-900 hover:font-medium cursor-pointer"
+              >
+                Login
+              </button>
+            </li>
           </div>
 
           {/* More Dropdown (Only for larger screens) */}
@@ -121,14 +150,20 @@ const Navbar = () => {
                 stroke="currentColor"
                 strokeWidth={2}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
 
-            {/* Dropdown Menu (Aligned to Right) */}
+            {/* Dropdown Menu */}
             <ul
               className={`absolute right-0 !mt-2 w-48 bg-gray-300 text-gray-700 border border-gray-500 shadow-lg z-50 rounded-md transition-all duration-300 ease-in-out ${
-                isMoreOpen ? "block opacity-100 scale-100" : "hidden opacity-0 scale-95"
+                isMoreOpen
+                  ? "block opacity-100 scale-100"
+                  : "hidden opacity-0 scale-95"
               }`}
             >
               {[
@@ -146,6 +181,14 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               ))}
+              <li>
+                <button
+                  onClick={handleStrapiLogin}
+                  className="block w-full text-right !px-4 !py-2 hover:text-gray-900 hover:font-medium cursor-pointer"
+                >
+                  Login
+                </button>
+              </li>
             </ul>
           </li>
         </ul>

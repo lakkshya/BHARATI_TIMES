@@ -63,7 +63,7 @@ const Sports = () => {
   if (error || allError) {
     return (
       <div className="text-center !p-8 text-red-500">
-        Error loading articles: {error || allError}
+        Error loading articles: {error.message || allError.message}
       </div>
     );
   }

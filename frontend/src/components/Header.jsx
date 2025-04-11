@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import useAuth from "../context/useAuth";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 const Header = () => {
   const [formattedDate, setFormattedDate] = useState("");
-  const { isLoggedIn } = useAuth();
 
   // Function to update the date
   const updateDate = () => {
@@ -54,48 +52,33 @@ const Header = () => {
             src="../../logo.png"
             alt="bharati-times-logo"
             loading="lazy"
-            className="h-auto w-auto max-w-full object-contain mx-auto"
+            className="h-auto w-auto max-w-full object-contain"
           />
-        </div>
-
-        {/* Date & Sign In/My Account Button (Stacked on Small Screens) */}
-        <div className="flex justify-end sm:hidden items-center w-full !mt-2">
-          {isLoggedIn ? (
-            <Link
-              to="/account"
-              className="!mt-1 !py-[0.35rem] !px-[0.5rem] bg-blue-800 text-white text-[0.75rem] sm:text-sm font-medium rounded-sm hover:bg-gray-800"
-            >
-              My Account
-            </Link>
-          ) : (
-            <Link
-              to="/login"
-              className="!mt-1 !py-[0.35rem] !px-[0.5rem] bg-blue-800 text-white text-[0.75rem] sm:text-sm font-medium rounded-sm hover:bg-gray-800"
-            >
-              Sign In
-            </Link>
-          )}
         </div>
       </div>
 
       {/* Right Section - Only Visible on `sm` and Larger */}
       <div className="hidden sm:flex sm:flex-col justify-center items-end gap-2 sm:w-1/2 lg:w-1/5">
         <p className="text-sm font-medium text-gray-700">{formattedDate}</p>
-        {isLoggedIn ? (
-          <Link
-            to="/account"
-            className="!py-[0.35rem] !px-[0.5rem] bg-blue-800 text-white text-sm font-medium rounded-sm hover:bg-gray-800"
+        <div className="flex gap-2 text-gray-700 font-normal text-sm">
+          <a
+            href="https://www.facebook.com/people/Bvicam-New-Delhi/100075344976453/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-blue-600 hover:text-gray-900 hover:font-medium"
           >
-            My Account
-          </Link>
-        ) : (
-          <Link
-            to="/login"
-            className="!py-[0.35rem] !px-[0.5rem] bg-blue-800 text-white text-sm font-medium rounded-sm hover:bg-gray-800"
+            <FaFacebook className="text-2xl" />
+          </a>
+
+          <a
+            href="https://www.instagram.com/ibvicam/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-pink-600 hover:text-gray-900 hover:font-medium"
           >
-            Sign In
-          </Link>
-        )}
+            <FaInstagram className="text-2xl" />
+          </a>
+        </div>
       </div>
     </header>
   );

@@ -413,7 +413,20 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   attributes: {
     author: Schema.Attribute.String & Schema.Attribute.Required;
     body: Schema.Attribute.RichText & Schema.Attribute.Required;
-    category: Schema.Attribute.String & Schema.Attribute.Required;
+    category: Schema.Attribute.Enumeration<
+      [
+        'National',
+        'International',
+        'Technology',
+        'Business',
+        'Education',
+        'Lifestyle',
+        'Entertainment',
+        'Sports',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'National'>;
     coverImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

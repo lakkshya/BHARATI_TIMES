@@ -32,10 +32,6 @@
       "type": "richtext",
       "required": true
     },
-    "category": {
-      "type": "string",
-      "required": true
-    },
     "timeToRead": {
       "type": "integer",
       "required": true,
@@ -50,6 +46,21 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "National",
+        "International",
+        "Technology",
+        "Business",
+        "Education",
+        "Lifestyle",
+        "Entertainment",
+        "Sports"
+      ],
+      "required": true,
+      "default": "National"
     }
   }
 }

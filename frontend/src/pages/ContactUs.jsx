@@ -15,6 +15,7 @@ const ContactUs = () => {
   const [errors, setErrors] = useState({});
   const [captchaError, setCaptchaError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [submitError, setSubmitError] = useState("");
 
   const generateCaptcha = () => {
     const num1 = Math.floor(Math.random() * 10) + 1;
@@ -70,12 +71,12 @@ const ContactUs = () => {
 
       if (response.ok) {
         setSuccessMessage("Your message has been submitted successfully!");
+        setSubmitError("");
       } else {
-        alert("Failed to submit the form.");
+        setSubmitError("Failed to submit the form. Please try again.");
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("An error occurred. Please try again.");
+      setSubmitError("An error occurred. Please try again later.", error.message);
     }
   };
 
@@ -96,10 +97,16 @@ const ContactUs = () => {
   return (
     <div className="flex justify-center items-center bg-white !px-3 lg:!px-6 !py-10">
       <div className="w-full xs:w-2/3 bg-white !p-5 sm:!p-8 rounded-lg shadow-lg border border-gray-200">
-        <h2 className="text-lg md:text-xl font-medium text-gray-800 !mb-6">Contact Us</h2>
+        <h2 className="text-lg md:text-xl font-medium text-gray-800 !mb-6">
+          Contact Us
+        </h2>
+
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-sm">
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 flex flex-col gap-1">
+              <label className="text-gray-700 font-medium">
+                Name <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
                 placeholder="Name"
@@ -113,7 +120,10 @@ const ContactUs = () => {
                 <p className="text-red-500 text-xs">{errors.name}</p>
               )}
             </div>
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 flex flex-col gap-1">
+              <label className="text-gray-700 font-medium">
+                Email Address <span className="text-red-500">*</span>
+              </label>
               <input
                 type="email"
                 placeholder="Email Address"
@@ -129,7 +139,10 @@ const ContactUs = () => {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 flex flex-col gap-1">
+              <label className="text-gray-700 font-medium">
+                Contact number <span className="text-red-500">*</span>
+              </label>
               <input
                 type="tel"
                 placeholder="Contact Number"
@@ -143,7 +156,10 @@ const ContactUs = () => {
                 <p className="text-red-500 text-xs">{errors.contactNumber}</p>
               )}
             </div>
-            <div className="md:w-1/2">
+            <div className="md:w-1/2 flex flex-col gap-1">
+              <label className="text-gray-700 font-medium">
+                Location <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
                 placeholder="Location"
@@ -158,7 +174,10 @@ const ContactUs = () => {
               )}
             </div>
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
+            <label className="text-gray-700 font-medium">
+              Subject <span className="text-red-500">*</span>
+            </label>
             <input
               type="text"
               placeholder="Subject"
@@ -172,7 +191,10 @@ const ContactUs = () => {
               <p className="text-red-500 text-xs">{errors.subject}</p>
             )}
           </div>
-          <div>
+          <div className="flex flex-col gap-1">
+            <label className="text-gray-700 font-medium">
+              Message <span className="text-red-500">*</span>
+            </label>
             <textarea
               placeholder="Message"
               rows="4"
@@ -188,7 +210,9 @@ const ContactUs = () => {
           </div>
           <div>
             <div className="flex flex-col gap-2">
-              <span className="text-gray-800">{captchaQuestion}</span>
+              <span className="text-gray-700 font-medium">
+                {captchaQuestion}
+              </span>
               <input
                 type="text"
                 value={captchaInput}
@@ -202,9 +226,16 @@ const ContactUs = () => {
               <p className="text-red-500 text-xs">{captchaError}</p>
             )}
           </div>
+
+          {submitError && (
+            <p className="text-red-500 text-sm mb-4 text-center">
+              {submitError}
+            </p>
+          )}
+
           <button
             type="submit"
-            className="w-full !p-2 bg-red-500 text-white rounded-lg shadow-lg hover:bg-red-700 focus:outline-none"
+            className="w-full !p-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none"
           >
             Submit
           </button>
