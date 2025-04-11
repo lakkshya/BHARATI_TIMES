@@ -62,7 +62,7 @@ const Header = () => {
         <p className="text-sm font-medium text-gray-700">{formattedDate}</p>
         <div className="flex gap-2 text-gray-700 font-normal text-sm">
           <a
-            href="https://www.facebook.com/people/Bvicam-New-Delhi/100075344976453/"
+            href="https://www.facebook.com/BharatiTimesIndia/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-blue-600 hover:text-gray-900 hover:font-medium"
@@ -71,7 +71,7 @@ const Header = () => {
           </a>
 
           <a
-            href="https://www.instagram.com/ibvicam/"
+            href="https://www.instagram.com/bharati.times/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-pink-600 hover:text-gray-900 hover:font-medium"
