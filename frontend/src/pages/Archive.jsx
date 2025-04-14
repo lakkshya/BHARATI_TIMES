@@ -1,10 +1,15 @@
 import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
+
 import PdfCard from "../components/PdfCard";
 
 const Archive = () => {
+  const { language } = useLanguage();
+
   const { data, error, loading } = useFetch(
-    "http://localhost:1337/api/archives?populate=*"
+    `http://localhost:1337/api/archives/language/${language}`
   );
 
   // Format and get the most recent newspaper
@@ -44,7 +49,7 @@ const Archive = () => {
       <main className="flex flex-col w-full gap-8 md:gap-10">
         <div>
           <h2 className="text-xl font-medium inline tracking-widest">
-            ARCHIVE
+            {translations[language].archive}
           </h2>
         </div>
 

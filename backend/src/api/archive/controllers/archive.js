@@ -1,9 +1,18 @@
-'use strict';
+"use strict";
 
-/**
- * archive controller
- */
+const { createCoreController } = require("@strapi/strapi").factories;
 
-const { createCoreController } = require('@strapi/strapi').factories;
+module.exports = createCoreController("api::archive.archive", ({ strapi }) => ({
+  async filterByLanguage(ctx) {
+    const { language } = ctx.params;
 
-module.exports = createCoreController('api::archive.archive');
+    const entities = await strapi.entityService.findMany("api::archive.archive", {
+      filters: {
+        language: language, 
+      },
+      populate: "*",
+    });
+
+    ctx.body = { data: entities }; 
+  },
+}));

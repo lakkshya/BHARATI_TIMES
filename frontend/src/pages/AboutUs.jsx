@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 import {
   Microscope,
   Newspaper,
@@ -18,46 +20,48 @@ import {
 } from "lucide-react";
 
 const AboutUs = () => {
+  const { language } = useLanguage();
+
   const topics = [
     {
       icon: <Newspaper className="w-8 h-8 text-red-600" />,
-      title: "Breaking News",
-      desc: "Stay updated with real-time news coverage.",
+      title: translations[language].whatWeCover1,
+      desc: translations[language].whatWeCover1Desc,
     },
     {
       icon: <Landmark className="w-8 h-8 text-blue-600" />,
-      title: "Politics & Governance",
-      desc: "Insights into national and international policies.",
+      title: translations[language].whatWeCover2,
+      desc: translations[language].whatWeCover2Desc,
     },
     {
       icon: <Cpu className="w-8 h-8 text-green-600" />,
-      title: "Technology & Innovation",
-      desc: "Latest advancements in science, AI, and digital trends.",
+      title: translations[language].whatWeCover3,
+      desc: translations[language].whatWeCover3Desc,
     },
     {
       icon: <Briefcase className="w-8 h-8 text-yellow-600" />,
-      title: "Business & Economy",
-      desc: "Market trends, startups, and financial insights.",
+      title: translations[language].whatWeCover4,
+      desc: translations[language].whatWeCover4Desc,
     },
     {
       icon: <HeartPulse className="w-8 h-8 text-pink-600" />,
-      title: "Health & Wellness",
-      desc: "Medical advancements, fitness, and lifestyle tips.",
+      title: translations[language].whatWeCover5,
+      desc: translations[language].whatWeCover5Desc,
     },
     {
       icon: <Clapperboard className="w-8 h-8 text-purple-600" />,
-      title: "Entertainment & Culture",
-      desc: "Film, music, literature, and celebrity news.",
+      title: translations[language].whatWeCover6,
+      desc: translations[language].whatWeCover6Desc,
     },
     {
       icon: <Trophy className="w-8 h-8 text-orange-600" />,
-      title: "Sports Updates",
-      desc: "Highlights from the world of athletics and competitions.",
+      title: translations[language].whatWeCover7,
+      desc: translations[language].whatWeCover7Desc,
     },
     {
       icon: <Globe className="w-8 h-8 text-teal-600" />,
-      title: "Global Affairs",
-      desc: "Explore international developments and insights.",
+      title: translations[language].whatWeCover8,
+      desc: translations[language].whatWeCover8Desc,
     },
   ];
 
@@ -77,14 +81,10 @@ const AboutUs = () => {
         {/* Heading */}
         <div className="absolute inset-0 flex flex-col justify-center items-center gap-4 text-center text-white !px-12">
           <h1 className="text-3xl md:text-5xl font-bold tracking-widest w-2/3">
-            ABOUT US
+            {translations[language].aboutUs}
           </h1>
           <p className="text-white text-base md:text-xl !mt-4 leading-relaxed md:w-2/3">
-            Welcome to <strong>BharatiTimes</strong>, your trusted source for
-            accurate and timely news from around the world. Our team of
-            professional journalists is committed to delivering{" "}
-            <span className="font-semibold">unbiased, in-depth coverage</span>
-            on the latest trends, global events, technology, business, and more.
+            {translations[language].aboutStart}
           </p>
         </div>
       </section>
@@ -93,7 +93,7 @@ const AboutUs = () => {
         {/* Heading first on small screens */}
         <div className="lg:hidden flex items-center">
           <h2 className="text-xl md:text-3xl font-semibold text-gray-800">
-            Our Mission
+            {translations[language].ourMission}
           </h2>
         </div>
 
@@ -102,28 +102,25 @@ const AboutUs = () => {
             <li className="flex items-center gap-3">
               <Microscope className="w-6 h-6 text-red-600" />
               <span className="text-sm xs:text-base md:text-lg font-medium">
-                Provide factual, well-researched, and reliable news content.
+                {translations[language].mission1}
               </span>
             </li>
             <li className="flex items-center gap-3">
               <Newspaper className="w-6 h-6 text-blue-600" />
               <span className="text-sm xs:text-base md:text-lg font-medium">
-                Keep our readers informed about current events, trends, and
-                developments across industries.
+                {translations[language].mission2}
               </span>
             </li>
             <li className="flex items-center gap-3">
               <Binoculars className="w-6 h-6 text-green-600" />
               <span className="text-sm xs:text-base md:text-lg font-medium">
-                Offer in-depth analysis to help you understand complex global
-                issues.
+                {translations[language].mission3}
               </span>
             </li>
             <li className="flex items-center gap-3">
               <KeyRound className="w-6 h-6 text-pink-600" />
               <span className="text-sm xs:text-base md:text-lg font-medium">
-                Uphold the principles of journalistic integrity, transparency,
-                and objectivity.
+                {translations[language].mission4}
               </span>
             </li>
           </ul>
@@ -132,14 +129,14 @@ const AboutUs = () => {
         {/* Heading on larger screens */}
         <div className="hidden lg:flex items-center lg:justify-end lg:w-1/4 lg:border-l-4">
           <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 text-right">
-            Our Mission
+            {translations[language].ourMission}
           </h2>
         </div>
       </section>
 
       <section className="flex flex-col gap-8 bg-red-700 !px-6 md:!px-20 !py-16 text-white">
         <h2 className="text-xl md:text-3xl font-semibold text-center">
-          What We Cover
+          {translations[language].whatWeCover}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {topics.map((item, index) => (
@@ -158,7 +155,7 @@ const AboutUs = () => {
       <section className="flex flex-col lg:flex-row gap-8 !px-6 md:!px-20 !py-16">
         <div className="flex items-center lg:w-1/4 lg:border-r-4">
           <h2 className="text-xl md:text-3xl font-semibold text-gray-800">
-            Why Choose BharatiTimes?
+            {translations[language].whyChoose}
           </h2>
         </div>
 
@@ -167,28 +164,25 @@ const AboutUs = () => {
             <li className="flex items-center gap-3">
               <FileCheck className="w-6 h-6 text-red-600" />
               <span className="text-sm xs:text-base md:text-lg font-medium">
-                Accuracy & Credibility – We fact-check all information before
-                publishing.
+                {translations[language].whyChoose1}
               </span>
             </li>
             <li className="flex items-center gap-3">
               <Fan className="w-6 h-6 text-blue-600" />
               <span className="text-sm xs:text-base md:text-lg font-medium">
-                Unbiased Reporting – Our news is free from political and
-                corporate influence.
+                {translations[language].whyChoose2}
               </span>
             </li>
             <li className="flex items-center gap-3">
               <AlarmClockCheck className="w-6 h-6 text-green-600" />
               <span className="text-sm xs:text-base md:text-lg font-medium">
-                Timely Updates – We bring you breaking news as it happens.
+                {translations[language].whyChoose3}
               </span>
             </li>
             <li className="flex items-center gap-3">
               <Users className="w-6 h-6 text-pink-600" />
               <span className="text-sm xs:text-base md:text-lg font-medium">
-                Reader-Centric Approach – We value your opinions and strive to
-                serve content that matters.
+                {translations[language].whyChoose4}
               </span>
             </li>
           </ul>
@@ -197,15 +191,12 @@ const AboutUs = () => {
 
       <section className="flex flex-col gap-8 md:gap-16 bg-blue-950 text-white !px-6 md:!px-20 !py-10">
         <h2 className="text-xl md:text-3xl font-semibold text-center">
-          Join Our Community
+          {translations[language].joinCommunity}
         </h2>
         <div className="flex flex-col md:flex-row gap-6 items-center">
           <div className="w-full md:w-3/5">
             <p className="text-sm xs:text-base text-center md:text-xl md:text-left text-gray-300">
-              We believe news should be a conversation, not a monologue.
-              Subscribe to our newsletters, and become part of our growing
-              community. Your feedback, opinions, and participation help us
-              shape a better, more informed world.
+              {translations[language].joinCommunityDesc}
             </p>
           </div>
 
@@ -213,7 +204,7 @@ const AboutUs = () => {
             <form className="flex flex-col items-center gap-4 w-full">
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={translations[language].enterEmail}
                 className="w-full !px-4 !py-2 rounded-lg bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600"
                 required
               />
@@ -221,18 +212,15 @@ const AboutUs = () => {
                 type="submit"
                 className="bg-red-600 hover:bg-red-700 text-white font-medium !py-2 !px-6 rounded-lg shadow-md w-full"
               >
-                Subscribe to Newsletter
+                {translations[language].subscribeNewsletter}
               </button>
             </form>
           </div>
         </div>
 
         <div className="flex flex-col gap-2 text-center text-sm xs:text-base md:text-lg">
-          <p className="">
-            Thank You for Choosing BharatiTimes! We are honored to be your go-to
-            source for news and information.
-          </p>
-          <p className="">💡 Stay informed, stay empowered! 🚀</p>
+          <p className="">{translations[language].thanksForChoosing}</p>
+          <p className="">{translations[language].communityEnd}</p>
         </div>
       </section>
     </div>

@@ -61,6 +61,15 @@
       ],
       "required": true,
       "default": "National"
+    },
+    "language": {
+      "type": "enumeration",
+      "enum": [
+        "English",
+        "Hindi"
+      ],
+      "required": true,
+      "default": "English"
     }
   }
 }

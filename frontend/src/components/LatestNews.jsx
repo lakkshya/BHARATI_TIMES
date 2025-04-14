@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 
 const LatestNews = ({ articles }) => {
-
+  const { language } = useLanguage();
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -35,7 +37,7 @@ const LatestNews = ({ articles }) => {
   return (
     <div className="relative w-full h-80 overflow-hidden bg-gray-100 rounded-lg border">
       <div className="!px-4 !py-2 bg-white border-b">
-        <h2 className="text-lg font-medium">Latest News</h2>
+        <h2 className="text-lg font-medium">{translations[language].latestNews}</h2>
       </div>
       <div ref={scrollRef} className="h-full overflow-hidden">
         <div className="flex flex-col !space-y-4 animate-scroll">

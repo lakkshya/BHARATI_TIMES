@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 
 const ContactUs = () => {
+  const { language } = useLanguage();
+
   const [captchaQuestion, setCaptchaQuestion] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState(null);
   const [captchaInput, setCaptchaInput] = useState("");
@@ -31,18 +35,21 @@ const ContactUs = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.name.trim())
+      newErrors.name = translations[language].nameRequired;
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email))
-      newErrors.email = "Valid email is required";
+      newErrors.email = translations[language].validEmailRequired;
     if (
       !formData.contactNumber.trim() ||
       !/^\d{10}$/.test(formData.contactNumber)
     )
-      newErrors.contactNumber = "Valid 10-digit number required";
-    if (!formData.location.trim()) newErrors.location = "Location is required";
-    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
+      newErrors.contactNumber = translations[language].validNumberRequired;
+    if (!formData.location.trim())
+      newErrors.location = translations[language].locationRequired;
+    if (!formData.subject.trim())
+      newErrors.subject = translations[language].subjectRequired;
     if (!formData.message.trim() || formData.message.length < 10)
-      newErrors.message = "Message must be at least 10 characters";
+      newErrors.message = translations[language].messageLength;
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -76,7 +83,10 @@ const ContactUs = () => {
         setSubmitError("Failed to submit the form. Please try again.");
       }
     } catch (error) {
-      setSubmitError("An error occurred. Please try again later.", error.message);
+      setSubmitError(
+        "An error occurred. Please try again later.",
+        error.message
+      );
     }
   };
 
@@ -98,18 +108,19 @@ const ContactUs = () => {
     <div className="flex justify-center items-center bg-white !px-3 lg:!px-6 !py-10">
       <div className="w-full xs:w-2/3 bg-white !p-5 sm:!p-8 rounded-lg shadow-lg border border-gray-200">
         <h2 className="text-lg md:text-xl font-medium text-gray-800 !mb-6">
-          Contact Us
+          {translations[language].contactUs}
         </h2>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 text-sm">
           <div className="flex flex-col md:flex-row justify-between gap-4">
             <div className="md:w-1/2 flex flex-col gap-1">
               <label className="text-gray-700 font-medium">
-                Name <span className="text-red-500">*</span>
+                {translations[language].name}{" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                placeholder="Name"
+                placeholder={translations[language].name}
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
@@ -122,11 +133,12 @@ const ContactUs = () => {
             </div>
             <div className="md:w-1/2 flex flex-col gap-1">
               <label className="text-gray-700 font-medium">
-                Email Address <span className="text-red-500">*</span>
+                {translations[language].emailAddress}{" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder={translations[language].emailAddress}
                 value={formData.email}
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
@@ -141,11 +153,12 @@ const ContactUs = () => {
           <div className="flex flex-col md:flex-row justify-between gap-4">
             <div className="md:w-1/2 flex flex-col gap-1">
               <label className="text-gray-700 font-medium">
-                Contact number <span className="text-red-500">*</span>
+                {translations[language].contactNumber}{" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="tel"
-                placeholder="Contact Number"
+                placeholder={translations[language].contactNumber}
                 value={formData.contactNumber}
                 onChange={(e) =>
                   setFormData({ ...formData, contactNumber: e.target.value })
@@ -158,11 +171,12 @@ const ContactUs = () => {
             </div>
             <div className="md:w-1/2 flex flex-col gap-1">
               <label className="text-gray-700 font-medium">
-                Location <span className="text-red-500">*</span>
+                {translations[language].location}{" "}
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                placeholder="Location"
+                placeholder={translations[language].location}
                 value={formData.location}
                 onChange={(e) =>
                   setFormData({ ...formData, location: e.target.value })
@@ -176,11 +190,12 @@ const ContactUs = () => {
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-gray-700 font-medium">
-              Subject <span className="text-red-500">*</span>
+              {translations[language].subject}{" "}
+              <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
-              placeholder="Subject"
+              placeholder={translations[language].subject}
               value={formData.subject}
               onChange={(e) =>
                 setFormData({ ...formData, subject: e.target.value })
@@ -193,10 +208,11 @@ const ContactUs = () => {
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-gray-700 font-medium">
-              Message <span className="text-red-500">*</span>
+              {translations[language].message}{" "}
+              <span className="text-red-500">*</span>
             </label>
             <textarea
-              placeholder="Message"
+              placeholder={translations[language].message}
               rows="4"
               value={formData.message}
               onChange={(e) =>
@@ -217,7 +233,7 @@ const ContactUs = () => {
                 type="text"
                 value={captchaInput}
                 onChange={(e) => setCaptchaInput(e.target.value)}
-                placeholder="Answer"
+                placeholder={translations[language].answer}
                 className="!p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
                 maxLength={3}
               />
@@ -237,7 +253,7 @@ const ContactUs = () => {
             type="submit"
             className="w-full !p-2 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none"
           >
-            Submit
+            {translations[language].submit}
           </button>
         </form>
       </div>

@@ -372,6 +372,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiArchiveArchive extends Struct.CollectionTypeSchema {
   collectionName: 'archives';
   info: {
+    description: '';
     displayName: 'Archive';
     pluralName: 'archives';
     singularName: 'archive';
@@ -383,6 +384,9 @@ export interface ApiArchiveArchive extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    language: Schema.Attribute.Enumeration<['English', 'Hindi']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'English'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -434,6 +438,9 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     isBreakingNews: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
+    language: Schema.Attribute.Enumeration<['English', 'Hindi']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'English'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

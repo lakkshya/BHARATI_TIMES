@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 import PdfCard from "../components/PdfCard";
 
 const CurrentIssue = () => {
+  const { language } = useLanguage();
   const { data, error, loading } = useFetch(
-    "http://localhost:1337/api/archives?populate=*"
+    `http://localhost:1337/api/archives/language/${language}`
   );
 
   // Format and get the most recent newspaper
@@ -45,7 +48,7 @@ const CurrentIssue = () => {
       <main className="w-full flex flex-col items-center gap-8 md:gap-10">
         <div className="w-full xs:w-1/2 md:w-1/3 lg:w-1/4 flex justify-center">
           <h2 className="text-xl text-center font-medium inline tracking-widest">
-            CURRENT ISSUE
+            {translations[language].currentIssue}
           </h2>
         </div>
         {error ? (

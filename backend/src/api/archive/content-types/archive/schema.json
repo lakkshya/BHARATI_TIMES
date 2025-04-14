@@ -4,7 +4,8 @@
   "info": {
     "singularName": "archive",
     "pluralName": "archives",
-    "displayName": "Archive"
+    "displayName": "Archive",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,14 +16,23 @@
       "required": true
     },
     "pdfLink": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
+      ]
+    },
+    "language": {
+      "type": "enumeration",
+      "enum": [
+        "English",
+        "Hindi"
       ],
-      "type": "media",
-      "multiple": false,
+      "default": "English",
       "required": true
     }
   }

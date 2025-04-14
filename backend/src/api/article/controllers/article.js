@@ -5,19 +5,9 @@ const { createCoreController } = require("@strapi/strapi").factories;
 module.exports = createCoreController("api::article.article", ({ strapi }) => ({
   // Default `find` method for retrieving all articles
   async find(ctx) {
-    const { category } = ctx.query; // Get the category from query parameters
-
-    let filters = {};
-
-    if (category) {
-      // If a category filter is provided, add it to the filters object
-      filters.category = category;
-    }
-
     const entities = await strapi.entityService.findMany(
       "api::article.article",
       {
-        filters: filters, // Apply filters
         populate: ["coverImage"], // Add any relations you need to populate
       }
     );
@@ -25,14 +15,29 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
     return (ctx.body = entities);
   },
 
-  // Custom method to filter articles by category
-  async filterByCategory(ctx) {
-    const { category } = ctx.params; // Get category from the URL parameters
+  // Custom method to filter articles by language
+  async filterByLanguage(ctx) {
+    const { language } = ctx.params; // Get language from the URL parameters
 
     const entities = await strapi.entityService.findMany(
       "api::article.article",
       {
-        filters: { category }, // Filter by the provided category
+        filters: { language }, // Filter by the provided language
+        populate: ["coverImage"], // Add relations as necessary
+      }
+    );
+
+    return (ctx.body = entities);
+  },
+
+  // Custom method to filter articles by category and language
+  async filterByCategoryAndLanguage(ctx) {
+    const { category, language } = ctx.params; // Get category and language from the URL parameters
+
+    const entities = await strapi.entityService.findMany(
+      "api::article.article",
+      {
+        filters: { category, language }, // Filter by the provided category and language
         populate: ["coverImage"], // Add relations as necessary
       }
     );
@@ -52,7 +57,7 @@ module.exports = createCoreController("api::article.article", ({ strapi }) => ({
       "api::article.article",
       id,
       {
-        populate: ["coverImage"], // Add relations as necessary
+        populate: ["coverImage"],
       }
     );
 

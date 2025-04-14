@@ -1,8 +1,11 @@
 import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 
 const BreakingSlider = ({ articles }) => {
+  const { language } = useLanguage();
   const scrollRef = useRef(null);
 
   useEffect(() => {
@@ -34,7 +37,7 @@ const BreakingSlider = ({ articles }) => {
     <div className="flex items-center bg-white border w-full overflow-hidden">
       {/* Fixed Box on the Left */}
       <div className="bg-red-600 !py-2 !px-3 lg:!pl-6 text-sm md:text-md font-bold w-7/20 sm:w-1/5 text-white">
-        Breaking :
+        {translations[language].breaking} :
       </div>
 
       {/* Continuous Scrolling News */}

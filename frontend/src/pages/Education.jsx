@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 
 import AdSlider from "../components/AdSlider";
 import LatestNews from "../components/LatestNews";
@@ -9,15 +11,17 @@ import SideCard from "../components/SideCard";
 import ArticlesList from "../components/ArticlesList";
 
 const Education = () => {
+  const { language } = useLanguage();
+
   const { loading, error, data } = useFetch(
-    "http://localhost:1337/api/articles/category/Education"
+    `http://localhost:1337/api/articles/category/Education/${language}`
   );
 
   const {
     loading: allLoading,
     error: allError,
     data: allArticles,
-  } = useFetch("http://localhost:1337/api/articles");
+  } = useFetch(`http://localhost:1337/api/articles/language/${language}`);
 
   let shuffledArticles = [];
   if (allArticles) {
@@ -75,7 +79,7 @@ const Education = () => {
       <main className="flex flex-col w-full gap-8 md:gap-10">
         <div>
           <h2 className="text-xl font-medium inline tracking-widest">
-            EDUCATION NEWS
+          {translations[language].education} {translations[language].news}
           </h2>
         </div>
 
@@ -112,7 +116,7 @@ const Education = () => {
           </div>
 
           <div className="flex flex-col gap-5 md:w-1/3">
-            <h2 className="text-xl font-medium">You may also like</h2>
+            <h2 className="text-xl font-medium">{translations[language].youMayAlsoLike}</h2>
 
             <div className="grid grid-cols-1 gap-5">
               {shuffledArticles.slice(0, 6).map((article) => (

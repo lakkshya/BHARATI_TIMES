@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import { Link } from "react-router-dom";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 
 import AdSlider from "../components/AdSlider";
 import LatestNews from "../components/LatestNews";
@@ -11,8 +13,10 @@ import FullCard from "../components/FullCard";
 import BreakingSlider from "../components/BreakingSlider";
 
 const Home = () => {
+  const { language } = useLanguage();
+
   const { loading, error, data } = useFetch(
-    "http://localhost:1337/api/articles"
+    `http://localhost:1337/api/articles/language/${language}`
   );
 
   const filterArticlesByCategory = (category) => {
@@ -72,7 +76,9 @@ const Home = () => {
           <section className="flex flex-col md:flex-row gap-10">
             <div className="w-full md:w-1/3 lg:w-1/4 flex flex-col gap-5">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-medium">Current Issue</h2>
+                <h2 className="text-xl font-medium">
+                  {translations[language].currentIssue}
+                </h2>
               </div>
               <a
                 href="/currentissue"
@@ -86,13 +92,13 @@ const Home = () => {
                 />
                 <div className="flex flex-col gap-1">
                   <h3 className="text-lg font-semibold text-gray-900">
-                    Current Edition
+                    {translations[language].currentEdition}
                   </h3>
                   <p className="text-sm text-gray-600">
-                    View the complete newspaper PDF for this month’s issue.
+                    {translations[language].homeCurrentIssue}
                   </p>
                   <span className="text-sm text-blue-600 font-medium !mt-2">
-                    Show More
+                    {translations[language].showMore}
                   </span>
                 </div>
               </a>
@@ -101,25 +107,27 @@ const Home = () => {
             {/* National News */}
             <div className="w-full md:w-2/3 lg:w-3/4 flex flex-col gap-5">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-medium">National</h2>
+                <h2 className="text-xl font-medium">
+                  {translations[language].national}
+                </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                  <Link to="/national" className="text-sm font-medium">
-                    Show More
+                  <Link to="/national" className="flex text-sm font-medium">
+                    {translations[language].showMore}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                      />
+                    </svg>
                   </Link>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                    />
-                  </svg>
                 </div>
               </div>
               <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -141,25 +149,30 @@ const Home = () => {
             {/* International News */}
             <div className="flex flex-col gap-5">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-medium">International</h2>
+                <h2 className="text-xl font-medium">
+                  {translations[language].international}
+                </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                  <Link to="/international" className="text-sm font-medium">
-                    Show More
-                  </Link>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
+                  <Link
+                    to="/international"
+                    className="flex text-sm font-medium"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                    />
-                  </svg>
+                    {translations[language].showMore}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                      />
+                    </svg>
+                  </Link>
                 </div>
               </div>
               <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-3 gap-5">
@@ -180,25 +193,27 @@ const Home = () => {
             {/* Technology News */}
             <div className="flex flex-col gap-5">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-medium">Technology</h2>
+                <h2 className="text-xl font-medium">
+                  {translations[language].technology}
+                </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                  <Link to="/technology" className="text-sm font-medium">
-                    Show More
+                  <Link to="/technology" className="flex text-sm font-medium">
+                    {translations[language].showMore}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                      />
+                    </svg>
                   </Link>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                    />
-                  </svg>
                 </div>
               </div>
               <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-3 gap-5">
@@ -222,42 +237,12 @@ const Home = () => {
             {/* Business News */}
             <div className="w-full lg:w-3/5 flex flex-col gap-8 md:gap-5">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-medium">Business</h2>
+                <h2 className="text-xl font-medium">
+                  {translations[language].business}
+                </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                  <Link to="/business" className="text-sm font-medium">
-                    Show More
-                  </Link>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                    />
-                  </svg>
-                </div>
-              </div>
-              {
-                <FullCard
-                  articles={filterArticlesByCategory("Business").slice(0, 5)}
-                />
-              }
-            </div>
-            {/* Education News */}
-            <div className="w-full lg:w-2/5">
-              <div className="flex flex-col gap-8 md:gap-5">
-                <div className="flex justify-between items-center">
-                  <h2 className="text-xl font-medium">Education</h2>
-                  <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                    <Link to="/education" className="text-sm font-medium">
-                      Show More
-                    </Link>
+                  <Link to="/business" className="flex text-sm font-medium">
+                    {translations[language].showMore}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -272,6 +257,40 @@ const Home = () => {
                         d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
                       />
                     </svg>
+                  </Link>
+                </div>
+              </div>
+              {
+                <FullCard
+                  articles={filterArticlesByCategory("Business").slice(0, 5)}
+                />
+              }
+            </div>
+            {/* Education News */}
+            <div className="w-full lg:w-2/5">
+              <div className="flex flex-col gap-8 md:gap-5">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-xl font-medium">
+                    {translations[language].education}
+                  </h2>
+                  <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
+                    <Link to="/education" className="flex text-sm font-medium">
+                      {translations[language].showMore}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="size-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                        />
+                      </svg>
+                    </Link>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-5">
@@ -289,25 +308,27 @@ const Home = () => {
             {/* Lifestyle News */}
             <div className="flex flex-col gap-5 lg:w-1/2">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-medium">Lifestyle</h2>
+                <h2 className="text-xl font-medium">
+                  {translations[language].lifestyle}
+                </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                  <Link to="/lifestyle" className="text-sm font-medium">
-                    Show More
+                  <Link to="/lifestyle" className="flex text-sm font-medium">
+                    {translations[language].showMore}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                      />
+                    </svg>
                   </Link>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                    />
-                  </svg>
                 </div>
               </div>
               <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-2 gap-5">
@@ -321,25 +342,30 @@ const Home = () => {
             {/* Entertainment News */}
             <div className="flex flex-col gap-5 lg:w-1/2">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-medium">Entertainment</h2>
+                <h2 className="text-xl font-medium">
+                  {translations[language].entertainment}
+                </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                  <Link to="/entertainment" className="text-sm font-medium">
-                    Show More
-                  </Link>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
+                  <Link
+                    to="/entertainment"
+                    className="flex text-sm font-medium"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                    />
-                  </svg>
+                    {translations[language].showMore}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                      />
+                    </svg>
+                  </Link>
                 </div>
               </div>
               <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-2 gap-5">
@@ -356,25 +382,27 @@ const Home = () => {
             {/* Sports News */}
             <div className="flex flex-col gap-5">
               <div className="flex justify-between items-center">
-                <h2 className="text-xl font-medium">Sports</h2>
+                <h2 className="text-xl font-medium">
+                  {translations[language].sports}
+                </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
-                  <Link to="/sports" className="text-sm font-medium">
-                    Show More
+                  <Link to="/sports" className="flex text-sm font-medium">
+                    {translations[language].showMore}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+                      />
+                    </svg>
                   </Link>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="size-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
-                    />
-                  </svg>
                 </div>
               </div>
               <div className="hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-5">

@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 
 const Navbar = () => {
+  const { language } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
 
@@ -17,7 +20,7 @@ const Navbar = () => {
   });
 
   const handleStrapiLogin = () => {
-    window.open("http://localhost:1337/admin/auth/login", "_blank"); 
+    window.open("http://localhost:1337/admin/auth/login", "_blank");
   };
 
   return (
@@ -73,15 +76,21 @@ const Navbar = () => {
           }`}
         >
           {[
-            { path: "/", label: "Home" },
-            { path: "/national", label: "National" },
-            { path: "/international", label: "International" },
-            { path: "/technology", label: "Technology" },
-            { path: "/business", label: "Business" },
-            { path: "/education", label: "Education" },
-            { path: "/lifestyle", label: "Lifestyle" },
-            { path: "/entertainment", label: "Entertainment" },
-            { path: "/sports", label: "Sports" },
+            { path: "/", label: translations[language].home },
+            { path: "/national", label: translations[language].national },
+            {
+              path: "/international",
+              label: translations[language].international,
+            },
+            { path: "/technology", label: translations[language].technology },
+            { path: "/business", label: translations[language].business },
+            { path: "/education", label: translations[language].education },
+            { path: "/lifestyle", label: translations[language].lifestyle },
+            {
+              path: "/entertainment",
+              label: translations[language].entertainment,
+            },
+            { path: "/sports", label: translations[language].sports },
           ].map(({ path, label }) => (
             <li key={path} className="text-right !mb-2 lg:!mb-0 lg:!py-2">
               <NavLink
@@ -103,10 +112,13 @@ const Navbar = () => {
           {/* More items for small screens (No dropdown) */}
           <div className="lg:hidden !pb-2">
             {[
-              { path: "/aboutus", label: "About" },
-              { path: "/contactus", label: "Contact" },
-              { path: "/currentissue", label: "Current Issue" },
-              { path: "/archive", label: "Archive" },
+              { path: "/aboutus", label: translations[language].about },
+              { path: "/contactus", label: translations[language].contact },
+              {
+                path: "/currentissue",
+                label: translations[language].currentIssue,
+              },
+              { path: "/archive", label: translations[language].archive },
             ].map(({ path, label }) => (
               <li key={path} className="text-right !mb-2">
                 <NavLink
@@ -129,7 +141,7 @@ const Navbar = () => {
                 onClick={handleStrapiLogin}
                 className="hover:text-gray-900 hover:font-medium cursor-pointer"
               >
-                Login
+                {translations[language].login}
               </button>
             </li>
           </div>
@@ -141,7 +153,7 @@ const Navbar = () => {
             onMouseLeave={() => setIsMoreOpen(false)}
           >
             <button className="hover:text-gray-700 flex items-center">
-              More
+              {translations[language].more}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-4 h-4 ml-1"
@@ -167,10 +179,13 @@ const Navbar = () => {
               }`}
             >
               {[
-                { path: "/aboutus", label: "About" },
-                { path: "/contactus", label: "Contact" },
-                { path: "/currentissue", label: "Current Issue" },
-                { path: "/archive", label: "Archive" },
+                { path: "/aboutus", label: translations[language].about },
+                { path: "/contactus", label: translations[language].contact },
+                {
+                  path: "/currentissue",
+                  label: translations[language].currentIssue,
+                },
+                { path: "/archive", label: translations[language].archive },
               ].map(({ path, label }) => (
                 <li key={path}>
                   <NavLink
@@ -186,7 +201,7 @@ const Navbar = () => {
                   onClick={handleStrapiLogin}
                   className="block w-full text-right !px-4 !py-2 hover:text-gray-900 hover:font-medium cursor-pointer"
                 >
-                  Login
+                  {translations[language].login}
                 </button>
               </li>
             </ul>
