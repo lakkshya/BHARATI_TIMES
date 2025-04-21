@@ -6,22 +6,36 @@ import PdfCard from "../components/PdfCard";
 
 const CurrentIssue = () => {
   const { language } = useLanguage();
+
   const { data, error, loading } = useFetch(
-    `http://localhost:1337/api/archives/language/${language}`
+    `http://localhost:1337/api/archives`
   );
 
   // Format and get the most recent newspaper
-  const recentNewspapers = data?.data
-    ?.map((item) => ({
-      id: item.id,
-      title: item.title,
-      date: item.createdAt.split("T")[0],
-      pdfLink: item.pdfLink?.url
-        ? `http://localhost:1337${item.pdfLink.url}`
-        : "#",
-    }))
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 1);
+  const recentNewspapers = Array.isArray(data)
+    ? data
+        .map((item) => {
+          const title =
+            language === "Hindi" ? item.hindiTitle : item.englishTitle;
+          const pdfLink =
+            language === "Hindi"
+              ? item.hindiPdfLink?.url
+              : item.englishPdfLink?.url;
+          return {
+            id: item.id,
+            englishTitle: item.englishTitle,
+            hindiTitle: item.hindiTitle,
+            englishPdfLink: item.englishPdfLink,
+            hindiPdfLink: item.hindiPdfLink,
+            createdAt: item.createdAt,
+            title,
+            date: item.createdAt?.split("T")[0],
+            pdfLink: pdfLink ? `http://localhost:1337${pdfLink}` : "#",
+          };
+        })
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 1)
+    : [];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -55,12 +69,22 @@ const CurrentIssue = () => {
           <div className="text-red-600 text-center">{error}</div>
         ) : (
           <section className="w-full xs:w-1/2 md:w-1/3 lg:w-1/4 flex flex-col gap-10">
-            {recentNewspapers.map((paper) => (
+            {recentNewspapers.map((item) => (
               <PdfCard
-                key={paper.id}
-                title={paper.title}
-                date={paper.date}
-                pdfUrl={paper.pdfLink}
+                key={item.id}
+                englishTitle={item.englishTitle}
+                hindiTitle={item.hindiTitle}
+                date={item.date}
+                englishPdfLink={
+                  item.englishPdfLink?.url
+                    ? `http://localhost:1337${item.englishPdfLink.url}`
+                    : null
+                }
+                hindiPdfLink={
+                  item.hindiPdfLink?.url
+                    ? `http://localhost:1337${item.hindiPdfLink.url}`
+                    : null
+                }
               />
             ))}
           </section>

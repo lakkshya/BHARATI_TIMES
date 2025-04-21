@@ -80,7 +80,7 @@ const AboutUs = () => {
 
         {/* Heading */}
         <div className="absolute inset-0 flex flex-col justify-center items-center gap-4 text-center text-white !px-12">
-          <h1 className="text-3xl md:text-5xl font-bold tracking-widest w-2/3">
+          <h1 className="text-2xl md:text-5xl font-bold tracking-widest w-2/3">
             {translations[language].aboutUs}
           </h1>
           <p className="text-white text-base md:text-xl !mt-4 leading-relaxed md:w-2/3">

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import useLanguage from "../context/useLanguage";
 import translations from "../utils/translation";
 
 const Navbar = () => {
   const { language } = useLanguage();
+  const [formattedDate, setFormattedDate] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
 
@@ -12,12 +13,44 @@ const Navbar = () => {
     setIsMenuOpen((prev) => !prev);
   };
 
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  useEffect(() => {
+    // Function to update the date
+    const updateDate = () => {
+      const today = new Date();
+
+      if (language === "Hindi") {
+        const weekday = translations["Hindi"].weekdays[today.getDay()];
+        const date = today.getDate();
+        const month = translations["Hindi"].months[today.getMonth()];
+        const year = today.getFullYear();
+
+        const formatted = `${weekday}, ${date} ${month}, ${year}`;
+        setFormattedDate(formatted);
+      } else {
+        const formatted = today.toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        setFormattedDate(formatted);
+      }
+    };
+
+    updateDate();
+
+    const now = new Date();
+    const timeUntilMidnight =
+      new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0) -
+      now;
+
+    const midnightTimeout = setTimeout(() => {
+      updateDate();
+      setInterval(updateDate, 24 * 60 * 60 * 1000);
+    }, timeUntilMidnight);
+
+    return () => clearTimeout(midnightTimeout);
+  }, [language]);
 
   const handleStrapiLogin = () => {
     window.open("http://localhost:1337/admin/auth/login", "_blank");
@@ -71,26 +104,26 @@ const Navbar = () => {
 
         {/* Main Navigation */}
         <ul
-          className={`lg:flex justify-between text-sm text-gray-700 !px-3 lg:!px-6 transition-all duration-300 ease-in-out ${
+          className={`lg:flex justify-between text-base text-gray-700 !px-3 lg:!px-6 transition-all duration-300 ease-in-out ${
             isMenuOpen ? "block opacity-100" : "hidden opacity-0 lg:opacity-100"
           }`}
         >
           {[
             { path: "/", label: translations[language].home },
-            { path: "/national", label: translations[language].national },
+            { path: "/national", label: translations[language].National },
             {
               path: "/international",
-              label: translations[language].international,
+              label: translations[language].International,
             },
-            { path: "/technology", label: translations[language].technology },
-            { path: "/business", label: translations[language].business },
-            { path: "/education", label: translations[language].education },
-            { path: "/lifestyle", label: translations[language].lifestyle },
+            { path: "/technology", label: translations[language].Technology },
+            { path: "/business", label: translations[language].Business },
+            { path: "/education", label: translations[language].Education },
+            { path: "/lifestyle", label: translations[language].Lifestyle },
             {
               path: "/entertainment",
-              label: translations[language].entertainment,
+              label: translations[language].Entertainment,
             },
-            { path: "/sports", label: translations[language].sports },
+            { path: "/sports", label: translations[language].Sports },
           ].map(({ path, label }) => (
             <li key={path} className="text-right !mb-2 lg:!mb-0 lg:!py-2">
               <NavLink

@@ -3,8 +3,11 @@ import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import MainCard from "../components/MainCard";
 import SideCard from "../components/SideCard";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 
 const Article = () => {
+  const { language } = useLanguage();
   const { id } = useParams();
   const { loading, error, data } = useFetch(
     `http://localhost:1337/api/articles/${id}`
@@ -51,7 +54,9 @@ const Article = () => {
       </main>
       <aside className="w-full lg:w-1/3">
         <div className="flex flex-col gap-5">
-          <h2 className="text-xl font-medium">You may also like</h2>
+          <h2 className="text-xl font-medium">
+            {translations[language].youMayAlsoLike}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-5">
             {shuffledArticles.slice(0, 6).map((article) => (
               <SideCard key={article.id} article={article} />

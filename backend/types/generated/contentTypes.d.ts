@@ -384,19 +384,17 @@ export interface ApiArchiveArchive extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    language: Schema.Attribute.Enumeration<['English', 'Hindi']> &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'English'>;
+    englishPdfLink: Schema.Attribute.Media<'files'> & Schema.Attribute.Required;
+    englishTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    hindiPdfLink: Schema.Attribute.Media<'files'> & Schema.Attribute.Required;
+    hindiTitle: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::archive.archive'
     > &
       Schema.Attribute.Private;
-    pdfLink: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
-      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -415,8 +413,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    author: Schema.Attribute.String & Schema.Attribute.Required;
-    body: Schema.Attribute.RichText & Schema.Attribute.Required;
     category: Schema.Attribute.Enumeration<
       [
         'National',
@@ -435,12 +431,18 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    englishAuthor: Schema.Attribute.String & Schema.Attribute.Required;
+    englishBody: Schema.Attribute.RichText & Schema.Attribute.Required;
+    englishTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    hindiAuthor: Schema.Attribute.String & Schema.Attribute.Required;
+    hindiBody: Schema.Attribute.RichText & Schema.Attribute.Required;
+    hindiTitle: Schema.Attribute.String & Schema.Attribute.Required;
     isBreakingNews: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
-    language: Schema.Attribute.Enumeration<['English', 'Hindi']> &
+    isTopStory: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'English'>;
+      Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -456,10 +458,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         },
         number
       >;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
-    topStory: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

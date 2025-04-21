@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-
+import useLanguage from "../context/useLanguage";
 import HTMLFlipBook from "react-pageflip";
 import * as pdfjs from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker?url";
@@ -15,7 +15,23 @@ pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker;
 
 const FlipbookViewer = () => {
   const { state } = useLocation();
-  const { pdfUrl, title, date } = state || {};
+  const { englishTitle, hindiTitle, date, englishPdfLink, hindiPdfLink } =
+    state || {};
+
+  const { language } = useLanguage();
+
+  const [title, setTitle] = useState(
+    language === "Hindi" ? hindiTitle : englishTitle
+  );
+  const [pdfUrl, setPdfUrl] = useState(
+    language === "Hindi" ? hindiPdfLink : englishPdfLink
+  );
+  useEffect(() => {
+    const newUrl = language === "Hindi" ? hindiPdfLink : englishPdfLink;
+    const newTitle = language === "Hindi" ? hindiTitle : englishTitle;
+    setPdfUrl(newUrl);
+    setTitle(newTitle);
+  }, [language, englishPdfLink, hindiPdfLink, englishTitle, hindiTitle]);
 
   const [pageImages, setPageImages] = useState([]);
   const [dimensions, setDimensions] = useState({ width: 400, height: 600 });
@@ -43,6 +59,7 @@ const FlipbookViewer = () => {
   useEffect(() => {
     const loadPdfAndConvertToImages = async () => {
       try {
+        setPageImages([]); //Clear previous pages
         const loadingTask = pdfjs.getDocument(pdfUrl);
         const pdf = await loadingTask.promise;
         const numPages = pdf.numPages;

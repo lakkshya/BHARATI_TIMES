@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "englishTitle": {
       "type": "string",
       "required": true
     },
@@ -24,11 +24,11 @@
         "images"
       ]
     },
-    "author": {
+    "englishAuthor": {
       "type": "string",
       "required": true
     },
-    "body": {
+    "englishBody": {
       "type": "richtext",
       "required": true
     },
@@ -42,7 +42,7 @@
       "default": false,
       "required": true
     },
-    "topStory": {
+    "isTopStory": {
       "type": "boolean",
       "default": false,
       "required": true
@@ -62,14 +62,17 @@
       "required": true,
       "default": "National"
     },
-    "language": {
-      "type": "enumeration",
-      "enum": [
-        "English",
-        "Hindi"
-      ],
-      "required": true,
-      "default": "English"
+    "hindiTitle": {
+      "type": "string",
+      "required": true
+    },
+    "hindiAuthor": {
+      "type": "string",
+      "required": true
+    },
+    "hindiBody": {
+      "type": "richtext",
+      "required": true
     }
   }
 }

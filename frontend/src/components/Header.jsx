@@ -30,7 +30,7 @@ const Header = () => {
         setFormattedDate(formatted);
       }
     };
-    
+
     updateDate();
 
     const now = new Date();
@@ -59,7 +59,7 @@ const Header = () => {
       </div>
 
       {/* Center Section (Logo + Date & Sign-in for Small Screens) */}
-      <div className="flex flex-col items-center sm:flex-row sm:justify-between w-full sm:w-1/2 lg:w-2/5">
+      <div className="flex flex-col gap-2 items-center sm:flex-row sm:justify-between w-full sm:w-1/2 lg:w-2/5">
         <div className="flex justify-center w-full sm:w-auto">
           <img
             src="../../logo.png"
@@ -67,6 +67,28 @@ const Header = () => {
             loading="lazy"
             className="h-auto w-auto max-w-full object-contain"
           />
+        </div>
+        <div className="sm:hidden w-full flex justify-end gap-4">
+          <button
+            className={`text-sm !px-2 !py-1 cursor-pointer rounded ${
+              language === "English" ? "bg-black text-white" : ""
+            }`}
+            onClick={() => {
+              setLanguage("English");
+            }}
+          >
+            English
+          </button>
+          <button
+            className={`text-sm !px-2 !py-1 cursor-pointer rounded ${
+              language === "Hindi" ? "bg-black text-white" : ""
+            }`}
+            onClick={() => {
+              setLanguage("Hindi");
+            }}
+          >
+            हिन्दी
+          </button>
         </div>
       </div>
 

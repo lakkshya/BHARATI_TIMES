@@ -4,10 +4,20 @@ module.exports = {
   routes: [
     {
       method: "GET",
-      path: "/archives/language/:language",
-      handler: "archive.filterByLanguage",
+      path: "/archives",
+      handler: "archive.find",
       config: {
-        auth: false,
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: "GET",
+      path: "/archives/:id",
+      handler: "archive.findOne",
+      config: {
+        policies: [],
+        middlewares: [],
       },
     },
   ],

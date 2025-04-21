@@ -20,16 +20,8 @@ module.exports = {
     },
     {
       method: "GET",
-      path: "/articles/language/:language",
-      handler: "article.filterByLanguage",
-      config: {
-        auth: false,
-      },
-    },
-    {
-      method: "GET",
-      path: "/articles/category/:category/:language",
-      handler: "article.filterByCategoryAndLanguage",
+      path: "/articles/category/:category",
+      handler: "article.filterByCategory",
       config: {
         auth: false,
       },

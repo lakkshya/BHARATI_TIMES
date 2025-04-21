@@ -16,7 +16,7 @@ const Home = () => {
   const { language } = useLanguage();
 
   const { loading, error, data } = useFetch(
-    `http://localhost:1337/api/articles/language/${language}`
+    `http://localhost:1337/api/articles`
   );
 
   const filterArticlesByCategory = (category) => {
@@ -108,7 +108,7 @@ const Home = () => {
             <div className="w-full md:w-2/3 lg:w-3/4 flex flex-col gap-5">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">
-                  {translations[language].national}
+                  {translations[language].National}
                 </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
                   <Link to="/national" className="flex text-sm font-medium">
@@ -150,7 +150,7 @@ const Home = () => {
             <div className="flex flex-col gap-5">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">
-                  {translations[language].international}
+                  {translations[language].International}
                 </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
                   <Link
@@ -194,7 +194,7 @@ const Home = () => {
             <div className="flex flex-col gap-5">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">
-                  {translations[language].technology}
+                  {translations[language].Technology}
                 </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
                   <Link to="/technology" className="flex text-sm font-medium">
@@ -238,7 +238,7 @@ const Home = () => {
             <div className="w-full lg:w-3/5 flex flex-col gap-8 md:gap-5">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">
-                  {translations[language].business}
+                  {translations[language].Business}
                 </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
                   <Link to="/business" className="flex text-sm font-medium">
@@ -271,7 +271,7 @@ const Home = () => {
               <div className="flex flex-col gap-8 md:gap-5">
                 <div className="flex justify-between items-center">
                   <h2 className="text-xl font-medium">
-                    {translations[language].education}
+                    {translations[language].Education}
                   </h2>
                   <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
                     <Link to="/education" className="flex text-sm font-medium">
@@ -309,7 +309,7 @@ const Home = () => {
             <div className="flex flex-col gap-5 lg:w-1/2">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">
-                  {translations[language].lifestyle}
+                  {translations[language].Lifestyle}
                 </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
                   <Link to="/lifestyle" className="flex text-sm font-medium">
@@ -343,7 +343,7 @@ const Home = () => {
             <div className="flex flex-col gap-5 lg:w-1/2">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">
-                  {translations[language].entertainment}
+                  {translations[language].Entertainment}
                 </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
                   <Link
@@ -383,7 +383,7 @@ const Home = () => {
             <div className="flex flex-col gap-5">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-medium">
-                  {translations[language].sports}
+                  {translations[language].Sports}
                 </h2>
                 <div className="flex items-center gap-1 text-red-700 hover:text-gray-600">
                   <Link to="/sports" className="flex text-sm font-medium">

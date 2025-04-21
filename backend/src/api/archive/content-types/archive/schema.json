@@ -11,29 +11,29 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "title": {
+    "englishTitle": {
       "type": "string",
       "required": true
     },
-    "pdfLink": {
+    "englishPdfLink": {
       "type": "media",
       "multiple": false,
       "required": true,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "files"
       ]
     },
-    "language": {
-      "type": "enumeration",
-      "enum": [
-        "English",
-        "Hindi"
-      ],
-      "default": "English",
+    "hindiTitle": {
+      "type": "string",
       "required": true
+    },
+    "hindiPdfLink": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "files"
+      ]
     }
   }
 }

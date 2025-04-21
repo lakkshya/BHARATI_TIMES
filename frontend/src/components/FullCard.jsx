@@ -1,9 +1,14 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { formatDistanceToNowStrict } from "date-fns";
+import { enUS } from "date-fns/locale";
+import { hi as hiBase } from "date-fns/locale";
 import { Link } from "react-router-dom";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 
 const FullCard = ({ articles }) => {
+  const { language } = useLanguage();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   if (!articles || articles.length === 0) return null;
@@ -19,16 +24,48 @@ const FullCard = ({ articles }) => {
   };
 
   const article = articles[currentIndex];
-  const { id, title, coverImage, author, createdAt, category, timeToRead } =
-    article;
+  const {
+    id,
+    englishTitle,
+    hindiTitle,
+    coverImage,
+    englishAuthor,
+    hindiAuthor,
+    createdAt,
+    category,
+    timeToRead,
+  } = article;
+
+  // Modified Hindi locale to keep English digits
+  const hiWithEnglishDigits = {
+    ...hiBase,
+    formatDistance: (...args) => {
+      const result = hiBase.formatDistance(...args);
+      // Replace Hindi digits with English digits
+      return result.replace(/[०-९]/g, (digit) => "०१२३४५६७८९".indexOf(digit));
+    },
+  };
 
   const formattedcreatedAt = createdAt
-    ? formatDistanceToNowStrict(new Date(createdAt), { addSuffix: true })
+    ? formatDistanceToNowStrict(new Date(createdAt), {
+        addSuffix: true,
+        locale: language === "Hindi" ? hiWithEnglishDigits : enUS,
+      })
+    : language === "Hindi"
+    ? "हाल ही में"
     : "Recently";
 
   const coverImageUrl = coverImage
     ? `http://localhost:1337${coverImage.url}`
     : "../../tech.jpg";
+
+  // Conditionally render title, author, and body based on language
+  const title = language === "Hindi" ? hindiTitle : englishTitle;
+  const author = language === "Hindi" ? hindiAuthor : englishAuthor;
+  const readingTimeText =
+    language === "Hindi"
+      ? `${timeToRead} मिनट पढ़ने का समय`
+      : `${timeToRead} min read`;
 
   return (
     <div className="relative w-full">
@@ -46,21 +83,17 @@ const FullCard = ({ articles }) => {
           {/* Content */}
           <div className="absolute bottom-0 flex flex-col justify-center gap-4 !py-6 !px-14">
             <div className="flex flex-col xs:inline text-sm md:text-base">
-              <span>{author || "Unknown Author"}</span>
+              <span>{author}</span>
               <span className="hidden xs:inline"> | </span>
               <span>{formattedcreatedAt}</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-medium">{title}</h3>
             <div className="flex flex-col xs:inline text-sm md:text-base">
               <span className="text-red-400 font-medium">
-                {category || "General"}
+                {translations[language][category]}
               </span>
               <span className="hidden xs:inline"> | </span>
-              <span>
-                {timeToRead
-                  ? `${timeToRead} min read`
-                  : "Reading time unavailable"}
-              </span>
+              <span>{readingTimeText}</span>
             </div>
           </div>
         </div>
@@ -115,9 +148,13 @@ FullCard.propTypes = {
   articles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      coverImage: PropTypes.shape({ url: PropTypes.string }),
-      author: PropTypes.string,
+      englishTitle: PropTypes.string,
+      hindiTitle: PropTypes.string,
+      coverImage: PropTypes.shape({
+        url: PropTypes.string,
+      }),
+      englishAuthor: PropTypes.string,
+      hindiAuthor: PropTypes.string,
       createdAt: PropTypes.string,
       category: PropTypes.string,
       timeToRead: PropTypes.number,

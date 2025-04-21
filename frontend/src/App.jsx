@@ -1,4 +1,7 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import useLanguage from "./context/useLanguage";
+
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -24,7 +27,24 @@ import EmailConfirmed from "./pages/EmailConfirmed";
 import MyAccount from "./pages/MyAccount";
 import Article from "./pages/Article";
 
-function App() {
+const App = () => {
+  const { language } = useLanguage();
+
+  useEffect(() => {
+    // Change font based on the selected language
+    if (language === "Hindi") {
+      document.documentElement.style.setProperty(
+        "--font-family",
+        "'Yantramanav', sans-serif"
+      );
+    } else {
+      document.documentElement.style.setProperty(
+        "--font-family",
+        "'Tajawal', sans-serif"
+      );
+    }
+  }, [language]);
+
   return (
     <>
       <Header />
@@ -55,6 +75,6 @@ function App() {
       <Footer />
     </>
   );
-}
+};
 
 export default App;

@@ -2,27 +2,39 @@ import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import useLanguage from "../context/useLanguage";
 import translations from "../utils/translation";
-
 import PdfCard from "../components/PdfCard";
 
 const Archive = () => {
   const { language } = useLanguage();
 
   const { data, error, loading } = useFetch(
-    `http://localhost:1337/api/archives/language/${language}`
+    `http://localhost:1337/api/archives`
   );
 
-  // Format and get the most recent newspaper
-  const allNewspapers = data?.data
-    ?.map((item) => ({
-      id: item.id,
-      title: item.title,
-      date: item.createdAt.split("T")[0],
-      pdfLink: item.pdfLink?.url
-        ? `http://localhost:1337${item.pdfLink.url}`
-        : "#",
-    }))
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  const allNewspapers = Array.isArray(data)
+    ? data
+        .map((item) => {
+          const title =
+            language === "Hindi" ? item.hindiTitle : item.englishTitle;
+          const pdfLink =
+            language === "Hindi"
+              ? item.hindiPdfLink?.url
+              : item.englishPdfLink?.url;
+
+          return {
+            id: item.id,
+            englishTitle: item.englishTitle,
+            hindiTitle: item.hindiTitle,
+            englishPdfLink: item.englishPdfLink,
+            hindiPdfLink: item.hindiPdfLink,
+            createdAt: item.createdAt,
+            title,
+            date: item.createdAt?.split("T")[0],
+            pdfLink: pdfLink ? `http://localhost:1337${pdfLink}` : "#",
+          };
+        })
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    : [];
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -54,16 +66,30 @@ const Archive = () => {
         </div>
 
         <section className="flex flex-col gap-10">
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-            {allNewspapers.map((paper) => (
-              <PdfCard
-                key={paper.id}
-                title={paper.title}
-                date={paper.date}
-                pdfUrl={paper.pdfLink}
-              />
-            ))}
-          </div>
+          {allNewspapers.length === 0 ? (
+            <p>No archives available at the moment.</p>
+          ) : (
+            <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+              {allNewspapers.map((item) => (
+                <PdfCard
+                  key={item.id}
+                  englishTitle={item.englishTitle}
+                  hindiTitle={item.hindiTitle}
+                  date={item.date}
+                  englishPdfLink={
+                    item.englishPdfLink?.url
+                      ? `http://localhost:1337${item.englishPdfLink.url}`
+                      : null
+                  }
+                  hindiPdfLink={
+                    item.hindiPdfLink?.url
+                      ? `http://localhost:1337${item.hindiPdfLink.url}`
+                      : null
+                  }
+                />
+              ))}
+            </div>
+          )}
         </section>
       </main>
     </div>

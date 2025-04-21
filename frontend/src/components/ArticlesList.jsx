@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 
 const ArticlesList = ({ articles }) => {
+  const { language } = useLanguage();
   const [currentPage, setCurrentPage] = useState(1);
   const [isManualNavigation, setIsManualNavigation] = useState(false); // Track user navigation
   const pageSize = 10;
@@ -35,35 +38,40 @@ const ArticlesList = ({ articles }) => {
   return (
     <div ref={listRef} className="border rounded-lg !pb-4 overflow-hidden">
       <div className="grid grid-cols-1">
-        {paginatedArticles.map((article) => (
-          <Link
-            to={`/article/${article.id}`}
-            key={article.id}
-            className="block"
-          >
-            <div className="flex gap-3 overflow-hidden bg-white group !px-3 !py-3 border-b-1 hover:bg-gray-100">
-              {/* Article Details */}
-              <div className="flex flex-col justify-center gap-1 w-2/3">
-                <h3 className="text-sm sm:text-base font-medium sidecard-title">
-                  {article.title}
-                </h3>
-              </div>
+        {paginatedArticles.map((article) => {
+          const title =
+            language === "Hindi" ? article.hindiTitle : article.englishTitle;
 
-              {/* Article Image */}
-              <div className="w-1/3 relative overflow-hidden rounded-lg">
-                <img
-                  src={
-                    article.coverImage
-                      ? `http://localhost:1337${article.coverImage.url}`
-                      : "../../tech.jpg"
-                  }
-                  className="w-full h-24 object-cover object-top rounded-lg transform transition-transform duration-500 group-hover:scale-110"
-                  alt={article.title}
-                />
+          return (
+            <Link
+              to={`/article/${article.id}`}
+              key={article.id}
+              className="block"
+            >
+              <div className="flex gap-3 overflow-hidden bg-white group !px-3 !py-3 border-b-1 hover:bg-gray-100">
+                {/* Article Details */}
+                <div className="flex flex-col justify-center gap-1 w-2/3">
+                  <h3 className="text-sm sm:text-base font-medium sidecard-title">
+                    {title}
+                  </h3>
+                </div>
+
+                {/* Article Image */}
+                <div className="w-1/3 relative overflow-hidden rounded-lg">
+                  <img
+                    src={
+                      article.coverImage
+                        ? `http://localhost:1337${article.coverImage.url}`
+                        : "../../tech.jpg"
+                    }
+                    className="w-full h-24 object-cover object-top rounded-lg transform transition-transform duration-500 group-hover:scale-110"
+                    alt={title}
+                  />
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </div>
 
       {/* Pagination Controls */}
@@ -77,7 +85,7 @@ const ArticlesList = ({ articles }) => {
               : "cursor-pointer"
           }`}
         >
-          Previous
+          {translations[language].previous}
         </button>
 
         {totalPages > 1 && (
@@ -119,7 +127,7 @@ const ArticlesList = ({ articles }) => {
               : "cursor-pointer"
           }`}
         >
-          Next
+          {translations[language].next}
         </button>
       </div>
     </div>
@@ -131,15 +139,11 @@ ArticlesList.propTypes = {
   articles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
+      englishTitle: PropTypes.string,
+      hindiTitle: PropTypes.string,
       coverImage: PropTypes.shape({
         url: PropTypes.string,
       }),
-      author: PropTypes.string,
-      createdAt: PropTypes.string,
-      category: PropTypes.string,
-      timeToRead: PropTypes.number,
-      body: PropTypes.string,
     })
   ),
 };

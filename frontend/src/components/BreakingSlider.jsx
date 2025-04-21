@@ -46,16 +46,21 @@ const BreakingSlider = ({ articles }) => {
         className="relative flex overflow-hidden w-13/20 sm:w-4/5 whitespace-nowrap"
       >
         <div className="flex !space-x-8">
-          {sortedArticles.concat(sortedArticles).map((item, i) => (
-            <div key={i} className="flex flex-col !px-4">
-              <Link
-                to={`/article/${item.id}`}
-                className="text-sm md:text-md flex-shrink-0 inline-block hover:underline"
-              >
-                {item.title}
-              </Link>
-            </div>
-          ))}
+          {sortedArticles.concat(sortedArticles).map((item, i) => {
+            const title =
+              language === "Hindi" ? item.hindiTitle : item.englishTitle;
+
+            return (
+              <div key={i} className="flex flex-col !px-4">
+                <Link
+                  to={`/article/${item.id}`}
+                  className="text-sm md:text-md flex-shrink-0 inline-block hover:underline"
+                >
+                  {title}
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -66,11 +71,12 @@ BreakingSlider.propTypes = {
   articles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
+      englishTitle: PropTypes.string,
+      hindiTitle: PropTypes.string,
       createdAt: PropTypes.string,
-      isBreakingNews: PropTypes.bool.isRequired,
+      isBreakingNews: PropTypes.bool,
     })
-  ).isRequired,
+  ),
 };
 
 export default BreakingSlider;
