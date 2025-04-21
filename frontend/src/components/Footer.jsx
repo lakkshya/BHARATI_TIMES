@@ -12,10 +12,12 @@ const Footer = () => {
         <div className="bg-gray-300 text-gray-900 font-medium flex flex-col md:flex-row w-full justify-between gap-6 !px-3 lg:!px-6 !py-6">
           <div className="flex gap-10 sm:gap-20 w-full md:w-1/2 justify-between md:justify-start">
             <div className="flex flex-col gap-3">
-              <h1 className="text-base md:text-lg">{translations[language].socialLinks}</h1>
+              <h1 className="text-base md:text-lg">
+                {translations[language].socialLinks}
+              </h1>
               <div className="flex flex-col gap-2 text-gray-700 font-normal text-base">
                 <a
-                  href="https://www.facebook.com/people/Bvicam-New-Delhi/100075344976453/"
+                  href="https://www.facebook.com/BharatiTimesIndia/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-gray-900 hover:font-medium"
@@ -25,7 +27,7 @@ const Footer = () => {
                 </a>
 
                 <a
-                  href="https://www.instagram.com/ibvicam/"
+                  href="https://www.instagram.com/bharati.times/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-gray-900 hover:font-medium"
@@ -57,7 +59,9 @@ const Footer = () => {
             </div>
 
             <div className="flex flex-col gap-3 items-end md:items-start text-right md:text-left">
-              <h1 className="text-base md:text-lg">{translations[language].importantLinks}</h1>
+              <h1 className="text-base md:text-lg">
+                {translations[language].importantLinks}
+              </h1>
               <div className="flex flex-col gap-2 text-gray-700 font-normal text-base">
                 <Link
                   to="/aboutus"

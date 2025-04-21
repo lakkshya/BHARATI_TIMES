@@ -94,6 +94,9 @@ const translations = {
     next: "Next",
     socialLinks: "Social Links",
     importantLinks: "Important Links",
+    pleaseWait: "Please Wait...",
+    errorMessage: "Unexpected error occured. Please try again later.",
+    loading: "Loading..."
   },
 
   Hindi: {
@@ -213,6 +216,9 @@ const translations = {
     next: "अगला",
     socialLinks: "सोशल मीडिया लिंक",
     importantLinks: "महत्वपूर्ण लिंक",
+    pleaseWait: "कृपया प्रतीक्षा करें...",
+    errorMessage: "अनअपेक्षित त्रुटि हुई है। कृपया बाद में पुनः प्रयास करें।",
+    loading: "लोड हो रहा है...",
   },
 };
 

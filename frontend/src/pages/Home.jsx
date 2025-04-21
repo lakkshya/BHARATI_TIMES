@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import useLanguage from "../context/useLanguage";
 import translations from "../utils/translation";
 
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 import AdSlider from "../components/AdSlider";
 import LatestNews from "../components/LatestNews";
 import MidCard from "../components/MidCard";
@@ -42,19 +44,11 @@ const Home = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="text-center !p-8">
-        <p className="!mt-4">Loading articles...</p>
-      </div>
-    );
+    return <Loading message={translations[language].pleaseWait} />;
   }
 
   if (error) {
-    return (
-      <div className="text-center !p-8 text-red-500">
-        Error loading articles: {error.message}
-      </div>
-    );
+    return <Error message={translations[language].errorMessage} />
   }
 
   return (

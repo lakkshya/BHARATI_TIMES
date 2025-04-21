@@ -3,6 +3,8 @@ import useFetch from "../hooks/useFetch";
 import useLanguage from "../context/useLanguage";
 import translations from "../utils/translation";
 
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 import BreakingSlider from "../components/BreakingSlider";
 import AdSlider from "../components/AdSlider";
 import LatestNews from "../components/LatestNews";
@@ -60,19 +62,11 @@ const Entertainment = () => {
   }, []);
 
   if (loading || allLoading) {
-    return (
-      <div className="text-center !p-8">
-        <p className="!mt-4">Loading articles...</p>
-      </div>
-    );
+    return <Loading message={translations[language].pleaseWait} />;
   }
 
   if (error || allError) {
-    return (
-      <div className="text-center !p-8 text-red-500">
-        Error loading articles: {error.message || allError.message}
-      </div>
-    );
+    return <Error message={translations[language].errorMessage} />;
   }
 
   return (

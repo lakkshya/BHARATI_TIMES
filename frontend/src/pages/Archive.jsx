@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import useLanguage from "../context/useLanguage";
 import translations from "../utils/translation";
+
+import Loading from "../components/Loading";
+import Error from "../components/Error";
 import PdfCard from "../components/PdfCard";
 
 const Archive = () => {
@@ -41,19 +44,11 @@ const Archive = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="text-center !p-8">
-        <p className="!mt-4">Loading archives...</p>
-      </div>
-    );
+    return <Loading message={translations[language].pleaseWait} />;
   }
 
   if (error) {
-    return (
-      <div className="text-center !p-8 text-red-500">
-        {error.message}. Please try again later.
-      </div>
-    );
+    return <Error message={translations[language].errorMessage} />;
   }
 
   return (

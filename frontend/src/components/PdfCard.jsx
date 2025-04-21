@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import useLanguage from "../context/useLanguage";
+import translations from "../utils/translation";
 import * as pdfjs from "pdfjs-dist";
 import pdfWorker from "pdfjs-dist/build/pdf.worker?url";
 
@@ -73,7 +74,9 @@ const PdfCard = ({
     >
       {isLoading ? (
         <div className="w-full h-[300px] bg-gray-200 animate-pulse flex items-center justify-center">
-          <span className="text-gray-500">Loading...</span>
+          <span className="text-gray-500">
+            {translations[language].loading}
+          </span>
         </div>
       ) : (
         <img
