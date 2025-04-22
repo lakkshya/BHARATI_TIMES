@@ -17,14 +17,14 @@ const National = () => {
   const { language } = useLanguage();
 
   const { loading, error, data } = useFetch(
-    `http://localhost:1337/api/articles/category/National`
+    `${import.meta.env.VITE_API_URL}/api/articles/category/National`
   );
 
   const {
     loading: allLoading,
     error: allError,
     data: allArticles,
-  } = useFetch(`http://localhost:1337/api/articles`);
+  } = useFetch(`${import.meta.env.VITE_API_URL}/api/articles`);
 
   let shuffledArticles = [];
   if (allArticles) {

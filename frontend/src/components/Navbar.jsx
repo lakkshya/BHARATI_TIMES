@@ -53,7 +53,7 @@ const Navbar = () => {
   }, [language]);
 
   const handleStrapiLogin = () => {
-    window.open("http://localhost:1337/admin/auth/login", "_blank");
+    window.open(`${import.meta.env.VITE_API_URL}/admin/auth/login`, "_blank");
   };
 
   return (
@@ -62,7 +62,7 @@ const Navbar = () => {
         {/* Mobile Header */}
         <div className="flex lg:hidden justify-between sm:justify-end w-full">
           <div className="flex items-center sm:hidden !px-3 lg:!px-6 text-gray-900 text-sm">
-            <p className="text-sm font-medium text-gray-700">{formattedDate}</p>
+            <p className="text-base font-medium text-gray-700">{formattedDate}</p>
           </div>
           <div
             className="cursor-pointer !px-3 lg:!px-6 !py-2"

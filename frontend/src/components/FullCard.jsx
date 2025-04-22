@@ -56,8 +56,8 @@ const FullCard = ({ articles }) => {
     : "Recently";
 
   const coverImageUrl = coverImage
-    ? `http://localhost:1337${coverImage.url}`
-    : "../../tech.jpg";
+    ? `${import.meta.env.VITE_API_URL}${coverImage.url}`
+    : null;
 
   // Conditionally render title, author, and body based on language
   const title = language === "Hindi" ? hindiTitle : englishTitle;

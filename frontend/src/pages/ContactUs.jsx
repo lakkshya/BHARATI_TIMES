@@ -70,7 +70,7 @@ const ContactUs = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:1337/api/contact-forms", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact-forms`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: formData }),

@@ -11,7 +11,7 @@ const CurrentIssue = () => {
   const { language } = useLanguage();
 
   const { data, error, loading } = useFetch(
-    `http://localhost:1337/api/archives`
+    `${import.meta.env.VITE_API_URL}/api/archives`
   );
 
   // Format and get the most recent newspaper
@@ -33,7 +33,7 @@ const CurrentIssue = () => {
             createdAt: item.createdAt,
             title,
             date: item.createdAt?.split("T")[0],
-            pdfLink: pdfLink ? `http://localhost:1337${pdfLink}` : "#",
+            pdfLink: pdfLink ? `${import.meta.env.VITE_API_URL}${pdfLink}` : "#",
           };
         })
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))

@@ -97,7 +97,7 @@ const Header = () => {
         <div className="flex items-center gap-4">
           <button
             className={`text-sm !px-2 !py-1 cursor-pointer rounded ${
-              language === "English" ? "bg-black text-white" : ""
+              language === "English" ? "bg-black text-white" : "hover:bg-gray-300"
             }`}
             onClick={() => {
               setLanguage("English");
@@ -107,7 +107,7 @@ const Header = () => {
           </button>
           <button
             className={`text-sm !px-2 !py-1 cursor-pointer rounded ${
-              language === "Hindi" ? "bg-black text-white" : ""
+              language === "Hindi" ? "bg-black text-white" : "hover:bg-gray-300"
             }`}
             onClick={() => {
               setLanguage("Hindi");
@@ -116,7 +116,7 @@ const Header = () => {
             हिन्दी
           </button>
         </div>
-        <p className="text-sm font-medium text-gray-700">{formattedDate}</p>
+        <p className="text-base font-medium text-gray-700">{formattedDate}</p>
         <div className="flex gap-2 text-gray-700 font-normal text-sm">
           <a
             href="https://www.facebook.com/BharatiTimesIndia/"

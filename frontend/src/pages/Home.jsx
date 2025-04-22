@@ -18,7 +18,7 @@ const Home = () => {
   const { language } = useLanguage();
 
   const { loading, error, data } = useFetch(
-    `http://localhost:1337/api/articles`
+    `${import.meta.env.VITE_API_URL}/api/articles`
   );
 
   const filterArticlesByCategory = (category) => {

@@ -17,14 +17,14 @@ const Lifestyle = () => {
   const { language } = useLanguage();
 
   const { loading, error, data } = useFetch(
-    `http://localhost:1337/api/articles/category/Lifestyle`
+    `${import.meta.env.VITE_API_URL}/api/articles/category/Lifestyle`
   );
 
   const {
     loading: allLoading,
     error: allError,
     data: allArticles,
-  } = useFetch(`http://localhost:1337/api/articles`);
+  } = useFetch(`${import.meta.env.VITE_API_URL}/api/articles`);
 
   let shuffledArticles = [];
   if (allArticles) {

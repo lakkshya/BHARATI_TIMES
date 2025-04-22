@@ -10,14 +10,14 @@ const Article = () => {
   const { language } = useLanguage();
   const { id } = useParams();
   const { loading, error, data } = useFetch(
-    `http://localhost:1337/api/articles/${id}`
+    `${import.meta.env.VITE_API_URL}/api/articles/${id}`
   );
 
   const {
     loading: allLoading,
     error: allError,
     data: allArticles,
-  } = useFetch("http://localhost:1337/api/articles");
+  } = useFetch(`${import.meta.env.VITE_API_URL}/api/articles`);
 
   useEffect(() => {
     window.scrollTo(0, 0);
